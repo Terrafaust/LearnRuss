@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprendre le Russe - Guide Complet</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #c53030;
+            --accent: #5a67d8;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --russe: #c53030;
+            --francais: #3182ce;
+            --success: #38a169;
+            --warning: #d69e2e;
+            --danger: #e53e3e;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .flag-mini {
+            display: flex;
+            height: 15px;
+            width: 30px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .flag-white { background: white; flex: 1; }
+        .flag-blue { background: #0039A6; flex: 1; }
+        .flag-red { background: #D52B1E; flex: 1; }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 2rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Program Section */
+        .week-container {
+            margin-bottom: 3rem;
+        }
+        
+        .week-header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+        
+        .week-content {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .day-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .day-item:hover {
+            background-color: #f7fafc;
+        }
+        
+        .day-item:last-child {
+            border-bottom: none;
+        }
+        
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .day-title {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .day-objective {
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+        
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .day-item.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .day-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .day-item.expanded .day-details {
+            max-height: 1000px;
+        }
+        
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .vocab-item {
+            background: #f7fafc;
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .russian-word {
+            color: var(--russe);
+            font-weight: bold;
+        }
+        
+        .pronunciation {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .translation {
+            color: var(--francais);
+        }
+        
+        /* Alphabet Section */
+        .search-container {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            background: white;
+        }
+        
+        .filter-tabs {
+            display: flex;
+            overflow-x: auto;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            gap: 1rem;
+        }
+        
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            background: #e2e8f0;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .letter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .letter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .letter-card.similar { border-left: 4px solid var(--success); }
+        .letter-card.different { border-left: 4px solid var(--danger); }
+        .letter-card.unique { border-left: 4px solid var(--warning); }
+        
+        .letter-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--russe);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .letter-type {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+        
+        .similar .letter-type { background: rgba(56, 161, 105, 0.2); color: var(--success); }
+        .different .letter-type { background: rgba(229, 62, 62, 0.2); color: var(--danger); }
+        .unique .letter-type { background: rgba(214, 158, 46, 0.2); color: var(--warning); }
+        
+        .letter-info {
+            margin-bottom: 1rem;
+        }
+        
+        .letter-pronunciation {
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .letter-example {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .word-examples {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+        
+        .word-example {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .alphabet-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Info Box */
+        .info-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="flag-mini">
+                    <div class="flag-white"></div>
+                    <div class="flag-blue"></div>
+                    <div class="flag-red"></div>
+                </div>
+                Apprendre le Russe
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showSection('home')" class="active">Accueil</a></li>
+                <li><a href="#" onclick="showSection('alphabet')">Alphabet</a></li>
+                <li><a href="#" onclick="showSection('program')">Programme 21 jours</a></li>
+                <li><a href="#" onclick="showSection('resources')">Ressources</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Section Accueil -->
+        <section id="home" class="section active">
+            <div class="container">
+                <div class="hero">
+                    <h1>🇷🇺 Apprendre le Russe</h1>
+                    <p>Un guide complet et progressif pour maîtriser la langue russe</p>
+                    <a href="#" onclick="showSection('alphabet')" class="btn">Commencer par l'alphabet</a>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card" onclick="showSection('alphabet')">
+                        <div class="feature-icon">🔤</div>
+                        <h3>Alphabet Cyrillique</h3>
+                        <p>Maîtrisez les 33 lettres de l'alphabet russe avec des exemples pratiques et des astuces mnémotechniques.</p>
+                    </div>
+                    
+                    <div class="feature-card" onclick="showSection('program')">
+                        <div class="feature-icon">📚</div>
+                        <h3>Programme 21 jours</h3>
+                        <p>Un parcours structuré en 3 semaines pour acquérir les bases essentielles du russe.</p>
+                    </div>
+                    
+                    <div class="feature-card" onclick="showSection('resources')">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Ressources</h3>
+                        <p>Applications, livres, sites web et conseils pour approfondir votre apprentissage.</p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">Pourquoi apprendre le russe ?</div>
+                    <p>Le russe est parlé par plus de 260 millions de personnes dans le monde. C'est une langue riche culturellement, ouvrant l'accès à une littérature exceptionnelle (Tolstoï, Dostoïevski, Pouchkine) et à une histoire fascinante. Apprendre le russe développe également vos capacités cognitives grâce à sa structure grammaticale unique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Alphabet -->
+        <section id="alphabet" class="section">
+            <div class="container">
+                <h1 style="text-align: center; color: white; margin-bottom: 2rem;">L'Alphabet Cyrillique</h1>
+                
+                <div class="search-container">
+                    <input type="text" class="search-input" id="searchLetters" placeholder="Rechercher une lettre..." oninput="filterLetters()">
+                </div>
+                
+                <div class="filter-tabs">
+                    <div class="filter-tab active" onclick="filterByType('all')">Toutes les lettres</div>
+                    <div class="filter-tab" onclick="filterByType('similar')">Lettres similaires</div>
+                    <div class="filter-tab" onclick="filterByType('different')">Lettres pièges</div>
+                    <div class="filter-tab" onclick="filterByType('unique')">Lettres uniques</div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">À propos de l'alphabet cyrillique</div>
+                    <p>L'alphabet cyrillique russe comporte 33 lettres. Il tire son nom de Saint Cyrille, un moine byzantin du IXe siècle qui, avec son frère Méthode, a créé le premier alphabet slave. L'apprentissage devient plus facile quand on remarque que certaines lettres sont identiques au latin, d'autres ressemblent mais se prononcent différemment, et certaines sont complètement nouvelles.</p>
+                </div>
+                
+                <div class="alphabet-grid" id="alphabetGrid">
+                    <!-- Lettres similaires -->
+                    <div class="letter-card similar" data-type="similar">
+                        <span class="letter-type">Identique</span>
+                        <div class="letter-display">
+                            <span>А</span>
+                            <span>а</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[a]</div>
+                            <div class="letter-example">comme dans "papa"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">ананас</span>
+                                <span class="pronunciation">[ananas]</span>
+                                <span class="translation"> - ananas</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">автобус</span>
+                                <span class="pronunciation">[aftabus]</span>
+                                <span class="translation"> - bus</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card similar" data-type="similar">
+                        <span class="letter-type">Identique</span>
+                        <div class="letter-display">
+                            <span>К</span>
+                            <span>к</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[k]</div>
+                            <div class="letter-example">comme dans "képi"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">кот</span>
+                                <span class="pronunciation">[kot]</span>
+                                <span class="translation"> - chat</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">кофе</span>
+                                <span class="pronunciation">[kofié]</span>
+                                <span class="translation"> - café</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card similar" data-type="similar">
+                        <span class="letter-type">Identique</span>
+                        <div class="letter-display">
+                            <span>М</span>
+                            <span>м</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[m]</div>
+                            <div class="letter-example">comme dans "maman"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">мама</span>
+                                <span class="pronunciation">[mama]</span>
+                                <span class="translation"> - maman</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">метро</span>
+                                <span class="pronunciation">[mitra]</span>
+                                <span class="translation"> - métro</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card similar" data-type="similar">
+                        <span class="letter-type">Identique</span>
+                        <div class="letter-display">
+                            <span>О</span>
+                            <span>о</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[o]</div>
+                            <div class="letter-example">comme dans "mot"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">окно</span>
+                                <span class="pronunciation">[akno]</span>
+                                <span class="translation"> - fenêtre</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">дом</span>
+                                <span class="pronunciation">[dom]</span>
+                                <span class="translation"> - maison</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card similar" data-type="similar">
+                        <span class="letter-type">Identique</span>
+                        <div class="letter-display">
+                            <span>Т</span>
+                            <span>т</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[t]</div>
+                            <div class="letter-example">comme dans "ton"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">там</span>
+                                <span class="pronunciation">[tam]</span>
+                                <span class="translation"> - là-bas</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">стол</span>
+                                <span class="pronunciation">[stol]</span>
+                                <span class="translation"> - table</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lettres pièges -->
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>В</span>
+                            <span>в</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[v]</div>
+                            <div class="letter-example">comme dans "vous" (ressemble à "B")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">вода</span>
+                                <span class="pronunciation">[vada]</span>
+                                <span class="translation"> - eau</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">вот</span>
+                                <span class="pronunciation">[vot]</span>
+                                <span class="translation"> - voici</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>Н</span>
+                            <span>н</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[n]</div>
+                            <div class="letter-example">comme dans "non" (ressemble à "H")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">нос</span>
+                                <span class="pronunciation">[nos]</span>
+                                <span class="translation"> - nez</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">ночь</span>
+                                <span class="pronunciation">[notch]</span>
+                                <span class="translation"> - nuit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>Р</span>
+                            <span>р</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[r]</div>
+                            <div class="letter-example">roulé (ressemble à "P")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">рука</span>
+                                <span class="pronunciation">[rouka]</span>
+                                <span class="translation"> - main</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">рыба</span>
+                                <span class="pronunciation">[ryba]</span>
+                                <span class="translation"> - poisson</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>С</span>
+                            <span>с</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[s]</div>
+                            <div class="letter-example">comme dans "savoir" (ressemble à "C")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">сок</span>
+                                <span class="pronunciation">[sok]</span>
+                                <span class="translation"> - jus</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">суп</span>
+                                <span class="pronunciation">[soup]</span>
+                                <span class="translation"> - soupe</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>У</span>
+                            <span>у</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[ou]</div>
+                            <div class="letter-example">comme dans "loup" (ressemble à "Y")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">утро</span>
+                                <span class="pronunciation">[outra]</span>
+                                <span class="translation"> - matin</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">ухо</span>
+                                <span class="pronunciation">[oukha]</span>
+                                <span class="translation"> - oreille</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card different" data-type="different">
+                        <span class="letter-type">Piège</span>
+                        <div class="letter-display">
+                            <span>Х</span>
+                            <span>х</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[kh]</div>
+                            <div class="letter-example">comme la "jota" espagnole (ressemble à "X")</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">хлеб</span>
+                                <span class="pronunciation">[khlièb]</span>
+                                <span class="translation"> - pain</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">хорошо</span>
+                                <span class="pronunciation">[kharacho]</span>
+                                <span class="translation"> - bien</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lettres uniques (quelques exemples) -->
+                    <div class="letter-card unique" data-type="unique">
+                        <span class="letter-type">Cyrillique</span>
+                        <div class="letter-display">
+                            <span>Б</span>
+                            <span>б</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[b]</div>
+                            <div class="letter-example">comme dans "bon"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">брат</span>
+                                <span class="pronunciation">[brat]</span>
+                                <span class="translation"> - frère</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">банан</span>
+                                <span class="pronunciation">[banan]</span>
+                                <span class="translation"> - banane</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card unique" data-type="unique">
+                        <span class="letter-type">Cyrillique</span>
+                        <div class="letter-display">
+                            <span>Г</span>
+                            <span>г</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[g]</div>
+                            <div class="letter-example">comme dans "gare"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">город</span>
+                                <span class="pronunciation">[gorad]</span>
+                                <span class="translation"> - ville</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">глаз</span>
+                                <span class="pronunciation">[glaz]</span>
+                                <span class="translation"> - œil</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card unique" data-type="unique">
+                        <span class="letter-type">Cyrillique</span>
+                        <div class="letter-display">
+                            <span>Д</span>
+                            <span>д</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[d]</div>
+                            <div class="letter-example">comme dans "dans"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">да</span>
+                                <span class="pronunciation">[da]</span>
+                                <span class="translation"> - oui</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">дом</span>
+                                <span class="pronunciation">[dom]</span>
+                                <span class="translation"> - maison</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card unique" data-type="unique">
+                        <span class="letter-type">Cyrillique</span>
+                        <div class="letter-display">
+                            <span>Ж</span>
+                            <span>ж</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[j]</div>
+                            <div class="letter-example">comme dans "journal" (plus appuyé)</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">жена</span>
+                                <span class="pronunciation">[jena]</span>
+                                <span class="translation"> - femme (épouse)</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">жук</span>
+                                <span class="pronunciation">[jouk]</span>
+                                <span class="translation"> - scarabée</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="letter-card unique" data-type="unique">
+                        <span class="letter-type">Cyrillique</span>
+                        <div class="letter-display">
+                            <span>Я</span>
+                            <span>я</span>
+                        </div>
+                        <div class="letter-info">
+                            <div class="letter-pronunciation">[ya]</div>
+                            <div class="letter-example">comme dans "yacht"</div>
+                        </div>
+                        <div class="word-examples">
+                            <div class="word-example">
+                                <span class="russian-word">я</span>
+                                <span class="pronunciation">[ya]</span>
+                                <span class="translation"> - je</span>
+                            </div>
+                            <div class="word-example">
+                                <span class="russian-word">яблоко</span>
+                                <span class="pronunciation">[yablaka]</span>
+                                <span class="translation"> - pomme</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">Astuces pour l'apprentissage</div>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Commencez par les lettres identiques à l'alphabet latin</li>
+                        <li>Puis apprenez les lettres pièges (qui ressemblent mais se prononcent différemment)</li>
+                        <li>Enfin, abordez les lettres spécifiques au cyrillique</li>
+                        <li>Pratiquez l'écriture de chaque lettre plusieurs fois</li>
+                        <li>Utilisez des applications comme Anki pour réviser régulièrement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Programme -->
+        <section id="program" class="section">
+            <div class="container">
+                <h1 style="text-align: center; color: white; margin-bottom: 2rem;">Programme d'apprentissage - 21 jours</h1>
+                
+                <div class="info-box">
+                    <div class="info-title">Présentation du programme</div>
+                    <p>Ce programme intensif vous propose une approche structurée pour débuter l'apprentissage du russe. Sur 21 jours, vous découvrirez les bases de la langue russe, depuis l'alphabet cyrillique jusqu'aux premières structures grammaticales. Chaque jour, consacrez environ 45 minutes à votre apprentissage.</p>
+                </div>
+
+                <!-- Semaine 1 -->
+                <div class="week-container">
+                    <div class="week-header">
+                        <h2>🗓️ Semaine 1 : Les Fondamentaux</h2>
+                        <p>Alphabet cyrillique et premières expressions</p>
+                    </div>
+                    <div class="week-content">
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 1 : Introduction à l'alphabet cyrillique (partie 1)</div>
+                                    <div class="day-objective">Se familiariser avec les 10 premières lettres</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Lettres étudiées :</strong> А, Б, В, Г, Д, Е, Ё, Ж, З, И</p>
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">да</span> <span class="pronunciation">[da]</span><br>
+                                        <span class="translation">oui</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">нет</span> <span class="pronunciation">[niet]</span><br>
+                                        <span class="translation">non</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">мама</span> <span class="pronunciation">[mama]</span><br>
+                                        <span class="translation">maman</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">папа</span> <span class="pronunciation">[papa]</span><br>
+                                        <span class="translation">papa</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">дом</span> <span class="pronunciation">[dom]</span><br>
+                                        <span class="translation">maison</span>
+                                    </div>
+                                </div>
+                                <p><strong>Exercices :</strong> Écriture de chaque lettre (10 fois), exercices de prononciation</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 2 : Introduction à l'alphabet cyrillique (partie 2)</div>
+                                    <div class="day-objective">Apprendre les lettres suivantes de l'alphabet</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Lettres étudiées :</strong> Й, К, Л, М, Н, О, П, Р, С, Т</p>
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">кот</span> <span class="pronunciation">[kot]</span><br>
+                                        <span class="translation">chat</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">пёс</span> <span class="pronunciation">[pyos]</span><br>
+                                        <span class="translation">chien</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">стол</span> <span class="pronunciation">[stol]</span><br>
+                                        <span class="translation">table</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">стул</span> <span class="pronunciation">[stoul]</span><br>
+                                        <span class="translation">chaise</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">окно</span> <span class="pronunciation">[akno]</span><br>
+                                        <span class="translation">fenêtre</span>
+                                    </div>
+                                </div>
+                                <p><strong>Focus :</strong> Le phénomène de l'akanie (réduction vocalique)</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 3 : Finalisation de l'alphabet cyrillique</div>
+                                    <div class="day-objective">Apprendre les dernières lettres et pratiquer la lecture</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Lettres étudiées :</strong> У, Ф, Х, Ц, Ч, Ш, Щ, Ъ, Ы, Ь, Э, Ю, Я</p>
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">юг</span> <span class="pronunciation">[youg]</span><br>
+                                        <span class="translation">sud</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">хлеб</span> <span class="pronunciation">[khlièb]</span><br>
+                                        <span class="translation">pain</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">чай</span> <span class="pronunciation">[tchaï]</span><br>
+                                        <span class="translation">thé</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">шум</span> <span class="pronunciation">[shoum]</span><br>
+                                        <span class="translation">bruit</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">яблоко</span> <span class="pronunciation">[yablaka]</span><br>
+                                        <span class="translation">pomme</span>
+                                    </div>
+                                </div>
+                                <p><strong>Exercices :</strong> Lecture de mots simples, quiz d'identification</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 4 : Salutations et présentations</div>
+                                    <div class="day-objective">Apprendre les expressions de base pour se saluer et se présenter</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Salutations :</strong></p>
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Здравствуйте</span> <span class="pronunciation">[zdravstvouytié]</span><br>
+                                        <span class="translation">Bonjour (formel)</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Привет</span> <span class="pronunciation">[priviet]</span><br>
+                                        <span class="translation">Salut</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">До свидания</span> <span class="pronunciation">[da svidaniya]</span><br>
+                                        <span class="translation">Au revoir</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Меня зовут...</span> <span class="pronunciation">[minya zavout]</span><br>
+                                        <span class="translation">Je m'appelle...</span>
+                                    </div>
+                                </div>
+                                <p><strong>Focus culturel :</strong> L'origine des salutations russes</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 5 : Expressions courantes et politesse</div>
+                                    <div class="day-objective">Apprendre les expressions de politesse essentielles</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Спасибо</span> <span class="pronunciation">[spasiba]</span><br>
+                                        <span class="translation">Merci</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Пожалуйста</span> <span class="pronunciation">[pajalousta]</span><br>
+                                        <span class="translation">S'il vous plaît</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Извините</span> <span class="pronunciation">[izvinitié]</span><br>
+                                        <span class="translation">Excusez-moi</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Что это?</span> <span class="pronunciation">[chto èta]</span><br>
+                                        <span class="translation">Qu'est-ce que c'est ?</span>
+                                    </div>
+                                </div>
+                                <p><strong>Focus culturel :</strong> Le système de politesse en russe</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 6 : Les nombres de 1 à 20</div>
+                                    <div class="day-objective">Apprendre à compter jusqu'à 20</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">один</span> <span class="pronunciation">[adin]</span><br>
+                                        <span class="translation">1</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">два</span> <span class="pronunciation">[dva]</span><br>
+                                        <span class="translation">2</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">три</span> <span class="pronunciation">[tri]</span><br>
+                                        <span class="translation">3</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">десять</span> <span class="pronunciation">[diesiat]</span><br>
+                                        <span class="translation">10</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">двадцать</span> <span class="pronunciation">[dvatsat]</span><br>
+                                        <span class="translation">20</span>
+                                    </div>
+                                </div>
+                                <p><strong>Focus linguistique :</strong> Les particularités grammaticales des nombres en russe</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 7 : Révision et pratique</div>
+                                    <div class="day-objective">Consolider les acquis de la première semaine</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Activités :</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Quiz sur l'alphabet cyrillique</li>
+                                    <li>Exercices de lecture à voix haute</li>
+                                    <li>Dialogue complet à pratiquer</li>
+                                    <li>Révision des nombres</li>
+                                </ul>
+                                <p><strong>Activité finale :</strong> Enregistrement d'une présentation personnelle de 30 secondes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semaine 2 -->
+                <div class="week-container">
+                    <div class="week-header">
+                        <h2>📚 Semaine 2 : Structures de Base</h2>
+                        <p>Grammaire et conversation élémentaire</p>
+                    </div>
+                    <div class="week-content">
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 8 : Pronoms personnels et verbe "être"</div>
+                                    <div class="day-objective">Maîtriser les pronoms et comprendre l'omission du verbe être</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <div class="vocabulary-grid">
+                                    <div class="vocab-item">
+                                        <span class="russian-word">я</span> <span class="pronunciation">[ya]</span><br>
+                                        <span class="translation">je</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">ты</span> <span class="pronunciation">[ti]</span><br>
+                                        <span class="translation">tu</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">он/она</span> <span class="pronunciation">[on/ana]</span><br>
+                                        <span class="translation">il/elle</span>
+                                    </div>
+                                    <div class="vocab-item">
+                                        <span class="russian-word">Я студент</span> <span class="pronunciation">[Ya stoudient]</span><br>
+                                        <span class="translation">Je suis étudiant</span>
+                                    </div>
+                                </div>
+                                <p><strong>Focus :</strong> Le russe comme langue sans copule au présent</p>
+                            </div>
+                        </div>
+
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 9-14 : Grammaire progressive</div>
+                                    <div class="day-objective">Verbes, questions, adjectifs, adverbes...</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Contenu des jours 9-14 :</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li><strong>Jour 9 :</strong> Premier groupe de verbes au présent</li>
+                                    <li><strong>Jour 10 :</strong> Second groupe de verbes au présent</li>
+                                    <li><strong>Jour 11 :</strong> Questions et réponses de base</li>
+                                    <li><strong>Jour 12 :</strong> Les adjectifs de base</li>
+                                    <li><strong>Jour 13 :</strong> Les adverbes et expressions de temps</li>
+                                    <li><strong>Jour 14 :</strong> Révision et consolidation</li>
+                                </ul>
+                                <p><strong>Compétences acquises :</strong> Conjugaison de base, formation de questions, accord des adjectifs, expression du temps</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semaine 3 -->
+                <div class="week-container">
+                    <div class="week-header">
+                        <h2>🗣️ Semaine 3 : Communication Élargie</h2>
+                        <p>Situations pratiques du quotidien</p>
+                    </div>
+                    <div class="week-content">
+                        <div class="day-item" onclick="toggleDay(this)">
+                            <div class="day-header">
+                                <div>
+                                    <div class="day-title">Jour 15-21 : Situations pratiques</div>
+                                    <div class="day-objective">Communication dans la vie quotidienne</div>
+                                </div>
+                                <span class="expand-icon">▼</span>
+                            </div>
+                            <div class="day-details">
+                                <p><strong>Thèmes abordés :</strong></p>
+                                <ul style="margin-left: 20px;">
+                                    <li><strong>Jour 15 :</strong> Exprimer ses goûts et préférences</li>
+                                    <li><strong>Jour 16 :</strong> La nourriture et le restaurant</li>
+                                    <li><strong>Jour 17 :</strong> Shopping et achats</li>
+                                    <li><strong>Jour 18 :</strong> Orientation et directions</li>
+                                    <li><strong>Jour 19 :</strong> Parler de la météo et des saisons</li>
+                                    <li><strong>Jour 20 :</strong> Téléphone et communication</li>
+                                    <li><strong>Jour 21 :</strong> Révision générale et bilan</li>
+                                </ul>
+                                <p><strong>Objectif final :</strong> Pouvoir tenir une conversation simple sur des sujets du quotidien</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <div class="info-title">💡 Conseils pour réussir le programme</div>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>Régularité :</strong> 45 minutes par jour, mieux vaut peu mais régulièrement</li>
+                        <li><strong>Pratique active :</strong> Écrivez, parlez à voix haute, enregistrez-vous</li>
+                        <li><strong>Révision :</strong> Répétez le vocabulaire des jours précédents</li>
+                        <li><strong>Immersion :</strong> Écoutez de la musique russe, regardez des vidéos</li>
+                        <li><strong>Patience :</strong> L'apprentissage d'une langue prend du temps, soyez bienveillant avec vous-même</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Ressources -->
+        <section id="resources" class="section">
+            <div class="container">
+                <h1 style="text-align: center; color: white; margin-bottom: 2rem;">Ressources Complémentaires</h1>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Applications</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Anki</strong> - Révision espacée du vocabulaire</li>
+                            <li><strong>Russian Alphabet Mastery</strong> - Pratique de l'alphabet</li>
+                            <li><strong>Tandem</strong> - Partenaires de conversation</li>
+                            <li><strong>Morpheem</strong> - Formation des mots russes</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Livres et Manuels</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li>"Le russe pour les débutants"</li>
+                            <li>"Grammaire russe pour débutants"</li>
+                            <li>"Le russe par les racines" (étymologie)</li>
+                            <li>"Histoire de la langue russe" - B. Unbegaun</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Sites Web</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Russie.fr</strong> - Alphabet et grammaire</li>
+                            <li><strong>RussianPod101</strong> - Leçons audio/vidéo</li>
+                            <li><strong>Wiktionary</strong> - Étymologie détaillée</li>
+                            <li><strong>Starling.rinet.ru</strong> - Base étymologique</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎥</div>
+                        <h3>Chaînes YouTube</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Russian with Max</strong> - Explications étymologiques</li>
+                            <li><strong>Be Fluent in Russian</strong> - Cours débutants</li>
+                            <li><strong>Russian from Russia</strong> - Professeurs natifs</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎤</div>
+                        <h3>Pratique Orale</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>HelloTalk</strong> - Échange linguistique</li>
+                            <li><strong>Italki</strong> - Tuteurs de langue</li>
+                            <li><strong>Podcasts russes</strong> - Immersion audio</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Stratégies d'Apprentissage</h3>
+                        <ul style="text-align: left; margin-top: 1rem;">
+                            <li><strong>Immersion linguistique</strong> - Films et séries</li>
+                            <li><strong>Approche lexicale</strong> - Blocs de vocabulaire</li>
+                            <li><strong>Répétition espacée</strong> - Algorithmes d'Anki</li>
+                            <li><strong>Journal linguistique</strong> - Suivi des progrès</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-title">🚀 Pour aller plus loin</div>
+                    <p>Une fois ce programme de 21 jours terminé, vous aurez acquis une base solide en russe. Pour continuer votre progression :</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Abordez les 6 cas du système casuel russe</li>
+                        <li>Étudiez les verbes de mouvement</li>
+                        <li>Approfondissez l'aspect perfectif/imperfectif</li>
+                        <li>Pratiquez la conversation avec des russophones</li>
+                        <li>Lisez des textes simples (nouvelles, articles)</li>
+                        <li>Explorez la culture russe (littérature, histoire, arts)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Navigation entre sections
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Afficher la section sélectionnée
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Mettre à jour les liens de navigation
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Trouver et activer le lien correspondant
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Défiler vers le haut
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Filtrage des lettres de l'alphabet
+        function filterLetters() {
+            const searchTerm = document.getElementById('searchLetters').value.toLowerCase();
+            const letterCards = document.querySelectorAll('.letter-card');
+            
+            letterCards.forEach(card => {
+                const cardContent = card.textContent.toLowerCase();
+                if (cardContent.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Filtrage par type de lettre
+        function filterByType(type) {
+            const letterCards = document.querySelectorAll('.letter-card');
+            const filterTabs = document.querySelectorAll('.filter-tab');
+            
+            // Mettre à jour les onglets actifs
+            filterTabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            letterCards.forEach(card => {
+                if (type === 'all' || card.dataset.type === type) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Expansion/contraction des détails des jours
+        function toggleDay(dayElement) {
+            dayElement.classList.toggle('expanded');
+        }
+        
+        // Animation d'entrée au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.letter-card, .feature-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+    </script>
+</body>
+</html>
