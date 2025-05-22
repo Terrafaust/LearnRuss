@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulaire Russe - Apprendre le Russe</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #c53030;
+            --accent: #5a67d8;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --russe: #c53030;
+            --francais: #3182ce;
+            --background: #f0f5ff;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary: #3b82f6;
+            --secondary: #ef4444;
+            --accent: #818cf8;
+            --light: #1f2937;
+            --dark: #f9fafb;
+            --russe: #f87171;
+            --francais: #60a5fa;
+            --background: #111827;
+            --card-bg: #1e293b;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--background);
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 30px 0;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .navigation {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--secondary);
+        }
+
+        .flag-colors {
+            display: flex;
+            height: 10px;
+            margin: 20px auto 0;
+            width: 200px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .flag-white { background: white; flex: 1; }
+        .flag-blue { background: #0039A6; flex: 1; }
+        .flag-red { background: #D52B1E; flex: 1; }
+
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            background-color: var(--card-bg);
+            color: var(--dark);
+        }
+
+        .search-box:focus {
+            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.3);
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .category-filter {
+            padding: 8px 16px;
+            background: var(--light);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            color: var(--dark);
+        }
+
+        .category-filter:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .category-filter.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .vocab-container {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 10px;
+        }
+
+        .vocab-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .russian-word {
+            font-size: 1.8rem;
+            color: var(--russe);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .pronunciation {
+            font-style: italic;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .translation {
+            font-size: 1.3rem;
+            color: var(--francais);
+            margin-bottom: 20px;
+            font-weight: 500;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.05);
+        }
+
+        .category-tag {
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .card-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .card-btn {
+            background: var(--light);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--dark);
+        }
+
+        .card-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .hidden-translation, .hidden-pronunciation, .hidden-russian {
+            filter: blur(5px);
+            user-select: none;
+        }
+
+        .hidden-translation:hover, .hidden-pronunciation:hover, .hidden-russian:hover {
+            filter: none;
+        }
+
+        .category-heading {
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .controls-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .control-btn:hover {
+            background: var(--accent);
+        }
+
+        .status-section {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .status-badge {
+            background: var(--card-bg);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow);
+        }
+
+        footer {
+            margin-top: 50px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .vocab-container {
+                grid-template-columns: 1fr;
+            }
+
+            .category-filters {
+                justify-content: center;
+            }
+
+            .category-filter {
+                margin: 3px;
+            }
+            
+            .controls-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .control-btn {
+                width: 90%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-btn {
+                width: 90%;
+                text-align: center;
+                margin: 2px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <button class="theme-toggle" id="theme-toggle">🌙</button>
+            <h1>Vocabulaire Russe</h1>
+            <p>Liste complète pour l'apprentissage du russe</p>
+            <div class="flag-colors">
+                <div class="flag-white"></div>
+                <div class="flag-blue"></div>
+                <div class="flag-red"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Accueil</a>
+                <a href="alphabet.html" class="nav-btn">🔤 Alphabet Cyrillique</a>
+                <a href="vocabulaire.html" class="nav-btn active">📚 Vocabulaire</a>
+                <a href="index.html#programme" class="nav-btn">📅 Programme 21 jours</a>
+                <a href="index.html#ressources" class="nav-btn">🔗 Ressources</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="search-container">
+                <input type="text" class="search-box" id="vocab-search" placeholder="Rechercher un mot...">
+            </div>
+
+            <div class="controls-section">
+                <button class="control-btn" id="hide-all-russian">Masquer mots russes</button>
+                <button class="control-btn" id="show-all-russian">Afficher mots russes</button>
+                <button class="control-btn" id="hide-all-pronunciations">Masquer prononciations</button>
+                <button class="control-btn" id="show-all-pronunciations">Afficher prononciations</button>
+                <button class="control-btn" id="hide-all-translations">Masquer traductions</button>
+                <button class="control-btn" id="show-all-translations">Afficher traductions</button>
+                <button class="control-btn" id="restore-all-words">Restaurer tous les mots</button>
+            </div>
+            
+            <div class="status-section">
+                <div class="status-badge">
+                    Mots masqués: <span id="hidden-words-count">0</span>
+                </div>
+                <div class="status-badge">
+                    Mots affichés: <span id="visible-words-count">0</span>
+                </div>
+            </div>
+
+            <div class="category-filters">
+                <button class="category-filter active" data-category="all">Tous</button>
+                <button class="category-filter" data-category="basics">Bases</button>
+                <button class="category-filter" data-category="greetings">Salutations</button>
+                <button class="category-filter" data-category="numbers">Nombres</button>
+                <button class="category-filter" data-category="food">Nourriture</button>
+                <button class="category-filter" data-category="travel">Voyage</button>
+                <button class="category-filter" data-category="housing">Logement</button>
+                <button class="category-filter" data-category="clothing">Vêtements</button>
+                <button class="category-filter" data-category="time">Temps</button>
+                <button class="category-filter" data-category="colors">Couleurs</button>
+                <button class="category-filter" data-category="body">Corps</button>
+                <button class="category-filter" data-category="family">Famille</button>
+                <button class="category-filter" data-category="weather">Météo</button>
+                <button class="category-filter" data-category="phrases">Phrases</button>
+                <button class="category-filter" data-category="dialogues">Dialogues</button>
+                <button class="category-filter" data-category="restaurant">Restaurant</button>
+                <button class="category-filter" data-category="shopping">Shopping</button>
+                <button class="category-filter" data-category="phone">Téléphone</button>
+                <button class="category-filter" data-category="work">Travail</button>
+            </div>
+
+            <h2 class="category-heading" id="current-category">Tous les mots</h2>
+
+            <div class="vocab-container" id="vocab-container">
+                <!-- Le vocabulaire sera généré dynamiquement -->
+            </div>
+        </div>
+    </main>
+
+    <a href="#" class="back-to-top" id="back-to-top">↑</a>
+
+    <footer>
+        <div class="container">
+            <p>Vocabulaire russe - Apprentissage du vocabulaire russe</p>
+        </div>
+    </footer>
+
+    <script>
+        // La base de données du vocabulaire (identique à celle du document original)
+        const vocabulary = [
+            // Bases
+            { russian: "да", pronunciation: "[da]", translation: "oui", categories: ["basics"] },
+            { russian: "нет", pronunciation: "[niet]", translation: "non", categories: ["basics"] },
+            { russian: "спасибо", pronunciation: "[spasiba]", translation: "merci", categories: ["basics"] },
+            { russian: "пожалуйста", pronunciation: "[pajalousta]", translation: "s'il vous plaît / je vous en prie", categories: ["basics"] },
+            { russian: "извините", pronunciation: "[izvinitié]", translation: "excusez-moi / pardon", categories: ["basics"] },
+            { russian: "хорошо", pronunciation: "[kharacho]", translation: "bien / d'accord", categories: ["basics"] },
+            { russian: "плохо", pronunciation: "[plokha]", translation: "mal", categories: ["basics"] },
+            { russian: "я", pronunciation: "[ya]", translation: "je", categories: ["basics"] },
+            { russian: "ты", pronunciation: "[ty]", translation: "tu", categories: ["basics"] },
+            { russian: "вы", pronunciation: "[vy]", translation: "vous", categories: ["basics"] },
+            { russian: "он", pronunciation: "[on]", translation: "il", categories: ["basics"] },
+            { russian: "она", pronunciation: "[ana]", translation: "elle", categories: ["basics"] },
+            { russian: "оно", pronunciation: "[ano]", translation: "il/elle (neutre)", categories: ["basics"] },
+            { russian: "мы", pronunciation: "[my]", translation: "nous", categories: ["basics"] },
+            { russian: "они", pronunciation: "[ani]", translation: "ils/elles", categories: ["basics"] },
+            { russian: "это", pronunciation: "[èta]", translation: "c'est / cela", categories: ["basics"] },
+            { russian: "что", pronunciation: "[chto]", translation: "quoi / que", categories: ["basics"] },
+            { russian: "кто", pronunciation: "[kto]", translation: "qui", categories: ["basics"] },
+            { russian: "где", pronunciation: "[gdié]", translation: "où", categories: ["basics"] },
+            { russian: "когда", pronunciation: "[kagda]", translation: "quand", categories: ["basics"] },
+            { russian: "почему", pronunciation: "[patchimou]", translation: "pourquoi", categories: ["basics"] },
+            { russian: "как", pronunciation: "[kak]", translation: "comment", categories: ["basics"] },
+            { russian: "сколько", pronunciation: "[skolka]", translation: "combien", categories: ["basics"] },
+
+            // Salutations
+            { russian: "здравствуйте", pronunciation: "[zdravstvouytié]", translation: "bonjour (formel)", categories: ["greetings"] },
+            { russian: "привет", pronunciation: "[priviet]", translation: "salut (informel)", categories: ["greetings"] },
+            { russian: "доброе утро", pronunciation: "[dobroye outra]", translation: "bon matin", categories: ["greetings", "time"] },
+            { russian: "добрый день", pronunciation: "[dobriy dien]", translation: "bon après-midi", categories: ["greetings", "time"] },
+            { russian: "добрый вечер", pronunciation: "[dobriy viètchèr]", translation: "bonsoir", categories: ["greetings", "time"] },
+            { russian: "до свидания", pronunciation: "[da svidaniya]", translation: "au revoir", categories: ["greetings"] },
+            { russian: "пока", pronunciation: "[paka]", translation: "salut (au revoir informel)", categories: ["greetings"] },
+            { russian: "как дела?", pronunciation: "[kak diela?]", translation: "comment ça va?", categories: ["greetings"] },
+            { russian: "очень приятно", pronunciation: "[otchin priyatna]", translation: "enchanté(e)", categories: ["greetings"] },
+            { russian: "меня зовут...", pronunciation: "[minya zavout...]", translation: "je m'appelle...", categories: ["greetings"] },
+            { russian: "как вас зовут?", pronunciation: "[kak vas zavout?]", translation: "comment vous appelez-vous? (formel)", categories: ["greetings"] },
+            { russian: "как тебя зовут?", pronunciation: "[kak tibya zavout?]", translation: "comment t'appelles-tu? (informel)", categories: ["greetings"] },
+
+            // Nombres
+            { russian: "один", pronunciation: "[adin]", translation: "un", categories: ["numbers"] },
+            { russian: "два", pronunciation: "[dva]", translation: "deux", categories: ["numbers"] },
+            { russian: "три", pronunciation: "[tri]", translation: "trois", categories: ["numbers"] },
+            { russian: "четыре", pronunciation: "[tchitirié]", translation: "quatre", categories: ["numbers"] },
+            { russian: "пять", pronunciation: "[piat]", translation: "cinq", categories: ["numbers"] },
+            { russian: "шесть", pronunciation: "[chiest]", translation: "six", categories: ["numbers"] },
+            { russian: "семь", pronunciation: "[siem]", translation: "sept", categories: ["numbers"] },
+            { russian: "восемь", pronunciation: "[vosièm]", translation: "huit", categories: ["numbers"] },
+            { russian: "девять", pronunciation: "[dieviat]", translation: "neuf", categories: ["numbers"] },
+            { russian: "десять", pronunciation: "[diesiat]", translation: "dix", categories: ["numbers"] },
+            { russian: "одиннадцать", pronunciation: "[adinnatsat]", translation: "onze", categories: ["numbers"] },
+            { russian: "двенадцать", pronunciation: "[dvinatsat]", translation: "douze", categories: ["numbers"] },
+            { russian: "двадцать", pronunciation: "[dvatsat]", translation: "vingt", categories: ["numbers"] },
+            { russian: "тридцать", pronunciation: "[tritsat]", translation: "trente", categories: ["numbers"] },
+            { russian: "сорок", pronunciation: "[sorak]", translation: "quarante", categories: ["numbers"] },
+            { russian: "пятьдесят", pronunciation: "[piTIdiSIAT]", translation: "cinquante", categories: ["numbers"] },
+            { russian: "сто", pronunciation: "[sto]", translation: "cent", categories: ["numbers"] },
+            { russian: "тысяча", pronunciation: "[tysiatcha]", translation: "mille", categories: ["numbers"] },
+
+            // Nourriture et boissons
+            { russian: "хлеб", pronunciation: "[khlieb]", translation: "pain", categories: ["food"] },
+            { russian: "мясо", pronunciation: "[miassa]", translation: "viande", categories: ["food"] },
+            { russian: "рыба", pronunciation: "[riba]", translation: "poisson", categories: ["food"] },
+            { russian: "овощи", pronunciation: "[ovachtchi]", translation: "légumes", categories: ["food"] },
+            { russian: "фрукты", pronunciation: "[froukti]", translation: "fruits", categories: ["food"] },
+            { russian: "яблоко", pronunciation: "[yablaka]", translation: "pomme", categories: ["food"] },
+            { russian: "суп", pronunciation: "[soup]", translation: "soupe", categories: ["food"] },
+            { russian: "салат", pronunciation: "[salat]", translation: "salade", categories: ["food"] },
+            { russian: "картошка", pronunciation: "[kartochka]", translation: "pommes de terre", categories: ["food"] },
+            { russian: "вода", pronunciation: "[vada]", translation: "eau", categories: ["food"] },
+            { russian: "чай", pronunciation: "[tchaï]", translation: "thé", categories: ["food"] },
+            { russian: "кофе", pronunciation: "[kofié]", translation: "café", categories: ["food"] },
+            { russian: "сок", pronunciation: "[sok]", translation: "jus", categories: ["food"] },
+            { russian: "молоко", pronunciation: "[malako]", translation: "lait", categories: ["food"] },
+            { russian: "вино", pronunciation: "[vino]", translation: "vin", categories: ["food"] },
+            { russian: "пиво", pronunciation: "[piva]", translation: "bière", categories: ["food"] },
+            { russian: "водка", pronunciation: "[vodka]", translation: "vodka", categories: ["food"] },
+            { russian: "сыр", pronunciation: "[syr]", translation: "fromage", categories: ["food"] },
+            { russian: "яйцо", pronunciation: "[yaïtso]", translation: "œuf", categories: ["food"] },
+            { russian: "ресторан", pronunciation: "[riestaran]", translation: "restaurant", categories: ["food", "travel"] },
+            { russian: "кафе", pronunciation: "[kafié]", translation: "café (établissement)", categories: ["food", "travel"] },
+            { russian: "меню", pronunciation: "[minïou]", translation: "menu", categories: ["food"] },
+
+            // Voyage et orientation
+            { russian: "улица", pronunciation: "[oulitsa]", translation: "rue", categories: ["travel"] },
+            { russian: "площадь", pronunciation: "[plachtchiad]", translation: "place", categories: ["travel"] },
+            { russian: "парк", pronunciation: "[park]", translation: "parc", categories: ["travel"] },
+            { russian: "музей", pronunciation: "[mouzièy]", translation: "musée", categories: ["travel"] },
+            { russian: "театр", pronunciation: "[tieatr]", translation: "théâtre", categories: ["travel"] },
+            { russian: "кинотеатр", pronunciation: "[kinatièatr]", translation: "cinéma", categories: ["travel"] },
+            { russian: "больница", pronunciation: "[balnitsa]", translation: "hôpital", categories: ["travel"] },
+            { russian: "аптека", pronunciation: "[aptièka]", translation: "pharmacie", categories: ["travel"] },
+            { russian: "прямо", pronunciation: "[priama]", translation: "tout droit", categories: ["travel"] },
+            { russian: "направо", pronunciation: "[naprava]", translation: "à droite", categories: ["travel"] },
+            { russian: "налево", pronunciation: "[nalièva]", translation: "à gauche", categories: ["travel"] },
+            { russian: "вперёд", pronunciation: "[vpieriod]", translation: "en avant", categories: ["travel"] },
+            { russian: "назад", pronunciation: "[nazad]", translation: "en arrière", categories: ["travel"] },
+            { russian: "близко", pronunciation: "[blizka]", translation: "près", categories: ["travel"] },
+            { russian: "далеко", pronunciation: "[daliéka]", translation: "loin", categories: ["travel"] },
+            { russian: "карта", pronunciation: "[karta]", translation: "carte", categories: ["travel"] },
+            { russian: "станция метро", pronunciation: "[stantsiya mètro]", translation: "station de métro", categories: ["travel"] },
+            { russian: "автобус", pronunciation: "[aftobous]", translation: "bus", categories: ["travel"] },
+            { russian: "поезд", pronunciation: "[poezd]", translation: "train", categories: ["travel"] },
+            { russian: "самолёт", pronunciation: "[samaliot]", translation: "avion", categories: ["travel"] },
+            { russian: "такси", pronunciation: "[taksi]", translation: "taxi", categories: ["travel"] },
+            { russian: "гостиница", pronunciation: "[gastInitsa]", translation: "hôtel", categories: ["travel", "housing"] },
+            { russian: "билет", pronunciation: "[biliet]", translation: "billet", categories: ["travel"] },
+
+            // Logement
+            { russian: "дом", pronunciation: "[dom]", translation: "maison", categories: ["housing"] },
+            { russian: "квартира", pronunciation: "[kvartira]", translation: "appartement", categories: ["housing"] },
+            { russian: "комната", pronunciation: "[komnata]", translation: "chambre", categories: ["housing"] },
+            { russian: "кухня", pronunciation: "[kukhnya]", translation: "cuisine", categories: ["housing"] },
+            { russian: "ванная", pronunciation: "[vannaya]", translation: "salle de bain", categories: ["housing"] },
+            { russian: "туалет", pronunciation: "[tualet]", translation: "toilettes", categories: ["housing"] },
+            { russian: "спальня", pronunciation: "[spalnya]", translation: "chambre à coucher", categories: ["housing"] },
+            { russian: "гостиная", pronunciation: "[gastInaya]", translation: "salon", categories: ["housing"] },
+            { russian: "окно", pronunciation: "[akno]", translation: "fenêtre", categories: ["housing"] },
+            { russian: "дверь", pronunciation: "[dvier]", translation: "porte", categories: ["housing"] },
+            { russian: "стол", pronunciation: "[stol]", translation: "table", categories: ["housing"] },
+            { russian: "стул", pronunciation: "[stoul]", translation: "chaise", categories: ["housing"] },
+            { russian: "кровать", pronunciation: "[krovat]", translation: "lit", categories: ["housing"] },
+            { russian: "шкаф", pronunciation: "[shkaf]", translation: "armoire", categories: ["housing"] },
+            { russian: "холодильник", pronunciation: "[khaladilnik]", translation: "réfrigérateur", categories: ["housing"] },
+            { russian: "диван", pronunciation: "[divan]", translation: "canapé", categories: ["housing"] },
+
+            // Vêtements
+            { russian: "рубашка", pronunciation: "[roubachka]", translation: "chemise", categories: ["clothing"] },
+            { russian: "брюки", pronunciation: "[briuki]", translation: "pantalon", categories: ["clothing"] },
+            { russian: "платье", pronunciation: "[platié]", translation: "robe", categories: ["clothing"] },
+            { russian: "юбка", pronunciation: "[youbka]", translation: "jupe", categories: ["clothing"] },
+            { russian: "свитер", pronunciation: "[svitièr]", translation: "pull", categories: ["clothing"] },
+            { russian: "куртка", pronunciation: "[kourtka]", translation: "veste", categories: ["clothing"] },
+            { russian: "пальто", pronunciation: "[palto]", translation: "manteau", categories: ["clothing"] },
+            { russian: "обувь", pronunciation: "[obouv]", translation: "chaussures", categories: ["clothing"] },
+            { russian: "носки", pronunciation: "[naski]", translation: "chaussettes", categories: ["clothing"] },
+            { russian: "шапка", pronunciation: "[chapka]", translation: "chapka, bonnet", categories: ["clothing", "weather"] },
+            { russian: "перчатки", pronunciation: "[pertchatki]", translation: "gants", categories: ["clothing"] },
+            { russian: "шарф", pronunciation: "[sharf]", translation: "écharpe", categories: ["clothing"] },
+            { russian: "сумка", pronunciation: "[soumka]", translation: "sac", categories: ["clothing"] },
+            { russian: "размер", pronunciation: "[razmièr]", translation: "taille", categories: ["clothing"] },
+            { russian: "цвет", pronunciation: "[tsvièt]", translation: "couleur", categories: ["clothing", "colors"] },
+
+            // Temps
+            { russian: "сегодня", pronunciation: "[sivodnia]", translation: "aujourd'hui", categories: ["time"] },
+            { russian: "вчера", pronunciation: "[ftchira]", translation: "hier", categories: ["time"] },
+            { russian: "завтра", pronunciation: "[zaftra]", translation: "demain", categories: ["time"] },
+            { russian: "утром", pronunciation: "[outram]", translation: "le matin", categories: ["time"] },
+            { russian: "днём", pronunciation: "[dniom]", translation: "l'après-midi", categories: ["time"] },
+            { russian: "вечером", pronunciation: "[viètchiram]", translation: "le soir", categories: ["time"] },
+            { russian: "ночью", pronunciation: "[notchiou]", translation: "la nuit", categories: ["time"] },
+            { russian: "неделя", pronunciation: "[nidiélia]", translation: "semaine", categories: ["time"] },
+            { russian: "месяц", pronunciation: "[mièsyats]", translation: "mois", categories: ["time"] },
+            { russian: "год", pronunciation: "[got]", translation: "année", categories: ["time"] },
+            { russian: "час", pronunciation: "[tchas]", translation: "heure", categories: ["time"] },
+            { russian: "минута", pronunciation: "[minouta]", translation: "minute", categories: ["time"] },
+            { russian: "понедельник", pronunciation: "[panidièlnik]", translation: "lundi", categories: ["time"] },
+            { russian: "вторник", pronunciation: "[ftornik]", translation: "mardi", categories: ["time"] },
+            { russian: "среда", pronunciation: "[srièda]", translation: "mercredi", categories: ["time"] },
+            { russian: "четверг", pronunciation: "[tchitvièrg]", translation: "jeudi", categories: ["time"] },
+            { russian: "пятница", pronunciation: "[piatnitsa]", translation: "vendredi", categories: ["time"] },
+            { russian: "суббота", pronunciation: "[soubbota]", translation: "samedi", categories: ["time"] },
+            { russian: "воскресенье", pronunciation: "[vaskresiènié]", translation: "dimanche", categories: ["time"] },
+
+            // Couleurs
+            { russian: "красный", pronunciation: "[krasniy]", translation: "rouge", categories: ["colors"] },
+            { russian: "синий", pronunciation: "[siniy]", translation: "bleu", categories: ["colors"] },
+            { russian: "жёлтый", pronunciation: "[joltiy]", translation: "jaune", categories: ["colors"] },
+            { russian: "зелёный", pronunciation: "[zilioniy]", translation: "vert", categories: ["colors"] },
+            { russian: "чёрный", pronunciation: "[tchorniy]", translation: "noir", categories: ["colors"] },
+            { russian: "белый", pronunciation: "[bieliy]", translation: "blanc", categories: ["colors"] },
+            { russian: "серый", pronunciation: "[sieriy]", translation: "gris", categories: ["colors"] },
+            { russian: "коричневый", pronunciation: "[karitchnievy]", translation: "marron", categories: ["colors"] },
+            { russian: "оранжевый", pronunciation: "[aranjevy]", translation: "orange", categories: ["colors"] },
+            { russian: "розовый", pronunciation: "[rozavy]", translation: "rose", categories: ["colors"] },
+            { russian: "фиолетовый", pronunciation: "[fialetivy]", translation: "violet", categories: ["colors"] },
+
+            // Corps humain
+            { russian: "голова", pronunciation: "[galava]", translation: "tête", categories: ["body"] },
+            { russian: "лицо", pronunciation: "[litso]", translation: "visage", categories: ["body"] },
+            { russian: "глаз/глаза", pronunciation: "[glaz/glaza]", translation: "œil/yeux", categories: ["body"] },
+            { russian: "нос", pronunciation: "[nos]", translation: "nez", categories: ["body"] },
+            { russian: "рот", pronunciation: "[rot]", translation: "bouche", categories: ["body"] },
+            { russian: "ухо/уши", pronunciation: "[oukha/oushi]", translation: "oreille/oreilles", categories: ["body"] },
+            { russian: "рука/руки", pronunciation: "[ruka/ruki]", translation: "bras, main/bras, mains", categories: ["body"] },
+            { russian: "нога/ноги", pronunciation: "[naga/nagi]", translation: "jambe, pied/jambes, pieds", categories: ["body"] },
+            { russian: "волосы", pronunciation: "[volasy]", translation: "cheveux", categories: ["body"] },
+            { russian: "сердце", pronunciation: "[sierdtsie]", translation: "cœur", categories: ["body"] },
+
+            // Famille
+            { russian: "семья", pronunciation: "[simya]", translation: "famille", categories: ["family"] },
+            { russian: "мать/мама", pronunciation: "[mat/mama]", translation: "mère/maman", categories: ["family"] },
+            { russian: "отец/папа", pronunciation: "[atiets/papa]", translation: "père/papa", categories: ["family"] },
+            { russian: "сын", pronunciation: "[syn]", translation: "fils", categories: ["family"] },
+            { russian: "дочь", pronunciation: "[dotch]", translation: "fille", categories: ["family"] },
+            { russian: "брат", pronunciation: "[brat]", translation: "frère", categories: ["family"] },
+            { russian: "сестра", pronunciation: "[siestra]", translation: "sœur", categories: ["family"] },
+            { russian: "муж", pronunciation: "[mouj]", translation: "mari", categories: ["family"] },
+            { russian: "жена", pronunciation: "[jina]", translation: "femme (épouse)", categories: ["family"] },
+            { russian: "бабушка", pronunciation: "[baboushka]", translation: "grand-mère", categories: ["family"] },
+            { russian: "дедушка", pronunciation: "[diedoushka]", translation: "grand-père", categories: ["family"] },
+            { russian: "внук", pronunciation: "[vnouk]", translation: "petit-fils", categories: ["family"] },
+            { russian: "внучка", pronunciation: "[vnoutchka]", translation: "petite-fille", categories: ["family"] },
+
+            // Météo
+            { russian: "погода", pronunciation: "[pagoda]", translation: "temps (météo)", categories: ["weather"] },
+            { russian: "солнечно", pronunciation: "[solnètchna]", translation: "ensoleillé", categories: ["weather"] },
+            { russian: "облачно", pronunciation: "[oblatchna]", translation: "nuageux", categories: ["weather"] },
+            { russian: "дождь", pronunciation: "[dojd]", translation: "pluie", categories: ["weather"] },
+            { russian: "снег", pronunciation: "[snièg]", translation: "neige", categories: ["weather"] },
+            { russian: "ветер", pronunciation: "[vièter]", translation: "vent", categories: ["weather"] },
+            { russian: "жарко", pronunciation: "[jarka]", translation: "chaud", categories: ["weather"] },
+            { russian: "холодно", pronunciation: "[kholodna]", translation: "froid", categories: ["weather"] },
+            { russian: "град", pronunciation: "[grat]", translation: "grêle", categories: ["weather"] },
+            { russian: "туман", pronunciation: "[touman]", translation: "brouillard", categories: ["weather"] },
+            { russian: "гроза", pronunciation: "[graza]", translation: "orage", categories: ["weather"] },
+            { russian: "градус", pronunciation: "[gradous]", translation: "degré", categories: ["weather"] },
+            { russian: "температура", pronunciation: "[tiempieratoura]", translation: "température", categories: ["weather"] },
+            { russian: "прогноз погоды", pronunciation: "[pragnoz pagodi]", translation: "prévisions météo", categories: ["weather"] },
+            { russian: "зонт", pronunciation: "[zont]", translation: "parapluie", categories: ["weather"] },
+
+            // Travail/Études
+            { russian: "работа", pronunciation: "[rabota]", translation: "travail", categories: ["work"] },
+            { russian: "работать", pronunciation: "[rabotat]", translation: "travailler", categories: ["work"] },
+            { russian: "учиться", pronunciation: "[outchitsa]", translation: "étudier", categories: ["work"] },
+            { russian: "офис", pronunciation: "[ofis]", translation: "bureau", categories: ["work"] },
+            { russian: "школа", pronunciation: "[shkola]", translation: "école", categories: ["work"] },
+            { russian: "университет", pronunciation: "[ouniversitet]", translation: "université", categories: ["work"] },
+            { russian: "учитель/учительница", pronunciation: "[outchitiel/outchitiélnitsa]", translation: "professeur (m/f)", categories: ["work"] },
+            { russian: "студент/студентка", pronunciation: "[stoudient/stoudientka]", translation: "étudiant/étudiante", categories: ["work"] },
+            { russian: "врач", pronunciation: "[vratch]", translation: "médecin", categories: ["work"] },
+            { russian: "инженер", pronunciation: "[injinièr]", translation: "ingénieur", categories: ["work"] },
+            { russian: "директор", pronunciation: "[direktor]", translation: "directeur", categories: ["work"] },
+            { russian: "коллега", pronunciation: "[kalliega]", translation: "collègue", categories: ["work"] },
+            { russian: "зарплата", pronunciation: "[zarplata]", translation: "salaire", categories: ["work"] },
+            { russian: "встреча", pronunciation: "[fstriecha]", translation: "réunion", categories: ["work"] },
+            { russian: "отпуск", pronunciation: "[otpousk]", translation: "vacances (congés)", categories: ["work"] },
+
+            // Autres mots fréquents
+            { russian: "хотеть", pronunciation: "[khatiet]", translation: "vouloir", categories: ["basics"] },
+            { russian: "мочь", pronunciation: "[motch]", translation: "pouvoir", categories: ["basics"] },
+            { russian: "знать", pronunciation: "[znat]", translation: "savoir, connaître", categories: ["basics"] },
+            { russian: "видеть", pronunciation: "[vidiet]", translation: "voir", categories: ["basics"] },
+            { russian: "слышать", pronunciation: "[slychat]", translation: "entendre", categories: ["basics"] },
+            { russian: "говорить", pronunciation: "[gavarit]", translation: "parler", categories: ["basics"] },
+            { russian: "думать", pronunciation: "[doumat]", translation: "penser", categories: ["basics"] },
+            { russian: "читать", pronunciation: "[tchitat]", translation: "lire", categories: ["basics"] },
+            { russian: "писать", pronunciation: "[pisat]", translation: "écrire", categories: ["basics"] },
+            { russian: "жить", pronunciation: "[jit]", translation: "vivre", categories: ["basics"] },
+
+            // Phrases utiles
+            { russian: "Что это?", pronunciation: "[chto èta?]", translation: "Qu'est-ce que c'est ?", categories: ["phrases", "basics"] },
+            { russian: "Кто это?", pronunciation: "[kto èta?]", translation: "Qui est-ce ?", categories: ["phrases", "basics"] },
+            { russian: "Можно?", pronunciation: "[mojna?]", translation: "Puis-je ? / Est-ce possible ?", categories: ["phrases", "basics"] },
+            { russian: "может быть", pronunciation: "[mojet bit]", translation: "peut-être", categories: ["phrases", "basics"] },
+            { russian: "Я студент", pronunciation: "[ya stoudient]", translation: "Je suis étudiant", categories: ["phrases", "work"] },
+            { russian: "Ты врач", pronunciation: "[ty vratch]", translation: "Tu es médecin", categories: ["phrases", "work"] },
+            { russian: "Вы говорите по-русски?", pronunciation: "[vy gavaritié pa-rousski?]", translation: "Parlez-vous russe ?", categories: ["phrases", "dialogues"] },
+            { russian: "Немного", pronunciation: "[niemnoga]", translation: "Un peu", categories: ["phrases", "basics"] },
+            { russian: "Я учу русский язык", pronunciation: "[ya outchou rousskiy yazik]", translation: "J'apprends le russe", categories: ["phrases", "work"] },
+            { russian: "русский язык", pronunciation: "[rousskiy yazik]", translation: "langue russe", categories: ["work", "basics"] },
+
+            // Dialogues de présentation
+            { russian: "Здравствуйте! Как вас зовут?", pronunciation: "[zdravstvouytié! kak vas zavout?]", translation: "Bonjour ! Comment vous appelez-vous ?", categories: ["dialogues", "greetings"] },
+            { russian: "Меня зовут Иван. А вас?", pronunciation: "[minya zavout Ivan. A vas?]", translation: "Je m'appelle Ivan. Et vous ?", categories: ["dialogues", "greetings"] },
+            { russian: "Очень приятно. Меня зовут Мария.", pronunciation: "[otchin priyatna. minya zavout Mariya.]", translation: "Enchanté. Je m'appelle Maria.", categories: ["dialogues", "greetings"] },
+            { russian: "А вас?", pronunciation: "[a vas?]", translation: "Et vous ?", categories: ["dialogues", "greetings"] },
+
+            // Restaurant et nourriture
+            { russian: "Можно меню, пожалуйста?", pronunciation: "[mojna minïou, pajalousta?]", translation: "Le menu, s'il vous plaît ?", categories: ["restaurant", "food"] },
+            { russian: "Я хочу заказать...", pronunciation: "[ya khatchou zakazat...]", translation: "Je voudrais commander...", categories: ["restaurant", "food"] },
+            { russian: "Счёт, пожалуйста", pronunciation: "[schtchiot, pajalousta]", translation: "L'addition, s'il vous plaît", categories: ["restaurant", "food"] },
+            { russian: "заказать", pronunciation: "[zakazat]", translation: "commander", categories: ["restaurant", "food"] },
+            { russian: "счёт", pronunciation: "[schtchiot]", translation: "addition", categories: ["restaurant", "food"] },
+
+            // Shopping et achats
+            { russian: "Сколько это стоит?", pronunciation: "[skolka èta stoit?]", translation: "Combien ça coûte ?", categories: ["shopping", "phrases"] },
+            { russian: "Можно посмотреть?", pronunciation: "[mojna pasmatrièt?]", translation: "Puis-je voir ?", categories: ["shopping", "phrases"] },
+            { russian: "Я возьму это", pronunciation: "[ya vazmou èta]", translation: "Je vais prendre ça", categories: ["shopping", "phrases"] },
+            { russian: "У вас есть...?", pronunciation: "[ou vas yiest...?]", translation: "Avez-vous... ?", categories: ["shopping", "phrases"] },
+            { russian: "стоить", pronunciation: "[stoit]", translation: "coûter", categories: ["shopping", "basics"] },
+            { russian: "посмотреть", pronunciation: "[pasmatrièt]", translation: "regarder, voir", categories: ["shopping", "basics"] },
+            { russian: "взять", pronunciation: "[vzyat]", translation: "prendre", categories: ["shopping", "basics"] },
+
+            // Orientation et directions
+            { russian: "Как пройти к...?", pronunciation: "[kak prayti k...?]", translation: "Comment aller à... ?", categories: ["travel", "phrases"] },
+            { russian: "Где находится...?", pronunciation: "[gdié nakhoditsa...?]", translation: "Où se trouve... ?", categories: ["travel", "phrases"] },
+            { russian: "находиться", pronunciation: "[nakhoditsa]", translation: "se trouver", categories: ["travel", "basics"] },
+            { russian: "пройти", pronunciation: "[prayti]", translation: "passer, aller", categories: ["travel", "basics"] },
+
+            // Téléphone et communication
+            { russian: "Алло!", pronunciation: "[allo!]", translation: "Allô !", categories: ["phone", "greetings"] },
+            { russian: "Кто говорит?", pronunciation: "[kto gavarit?]", translation: "Qui parle ?", categories: ["phone", "phrases"] },
+            { russian: "Это...", pronunciation: "[èta...]", translation: "C'est...", categories: ["phone", "phrases"] },
+            { russian: "Можно поговорить с...?", pronunciation: "[mojna pagavarit s...?]", translation: "Puis-je parler à... ?", categories: ["phone", "phrases"] },
+            { russian: "Его нет дома", pronunciation: "[yivo niet doma]", translation: "Il n'est pas à la maison", categories: ["phone", "phrases"] },
+            { russian: "Её нет дома", pronunciation: "[yiyo niet doma]", translation: "Elle n'est pas à la maison", categories: ["phone", "phrases"] },
+            { russian: "Перезвоните, пожалуйста", pronunciation: "[pièrèzvanitié, pajalousta]", translation: "Rappelez plus tard, s'il vous plaît", categories: ["phone", "phrases"] },
+            { russian: "поговорить", pronunciation: "[pagavarit]", translation: "parler, discuter", categories: ["phone", "basics"] },
+            { russian: "перезвонить", pronunciation: "[pièrèzvanit]", translation: "rappeler", categories: ["phone", "basics"] },
+
+            // Expressions temporelles supplémentaires
+            { russian: "Идёт дождь", pronunciation: "[idiot dojd]", translation: "Il pleut", categories: ["weather", "phrases"] },
+            { russian: "Идёт снег", pronunciation: "[idiot snièg]", translation: "Il neige", categories: ["weather", "phrases"] },
+            { russian: "Сегодня солнечно", pronunciation: "[sivodnia solnètchna]", translation: "Aujourd'hui il fait beau", categories: ["weather", "phrases", "time"] },
+
+            // Phrases de politesse supplémentaires
+            { russian: "Простите", pronunciation: "[prastitié]", translation: "Pardonnez-moi", categories: ["phrases", "basics"] },
+            { russian: "Не за что", pronunciation: "[nie za chto]", translation: "De rien", categories: ["phrases", "basics"] },
+            { russian: "Всё в порядке", pronunciation: "[vsio v pariaktié]", translation: "Tout va bien", categories: ["phrases", "basics"] },
+            { russian: "Помогите, пожалуйста", pronunciation: "[pamagitié, pajalousta]", translation: "Aidez-moi, s'il vous plaît", categories: ["phrases", "basics"] },
+            { russian: "Я не понимаю", pronunciation: "[ya nie panimayu]", translation: "Je ne comprends pas", categories: ["phrases", "basics"] },
+            { russian: "Повторите, пожалуйста", pronunciation: "[paftaritié, pajalousta]", translation: "Répétez, s'il vous plaît", categories: ["phrases", "basics"] },
+            { russian: "Говорите медленнее", pronunciation: "[gavaritié miedliènnièye]", translation: "Parlez plus lentement", categories: ["phrases", "basics"] },
+
+            // Expressions d'opinion et sentiment
+            { russian: "Мне нравится", pronunciation: "[mnié nravitsa]", translation: "J'aime, ça me plaît", categories: ["phrases", "basics"] },
+            { russian: "Мне не нравится", pronunciation: "[mnié nie nravitsa]", translation: "Je n'aime pas, ça ne me plaît pas", categories: ["phrases", "basics"] },
+            { russian: "Я люблю", pronunciation: "[ya liubliou]", translation: "J'aime", categories: ["phrases", "basics"] },
+            { russian: "Я не люблю", pronunciation: "[ya nie liubliou]", translation: "Je n'aime pas", categories: ["phrases", "basics"] },
+
+            // Autres phrases utiles du quotidien
+            { russian: "Сколько времени?", pronunciation: "[skolka vriemièni?]", translation: "Quelle heure est-il ?", categories: ["phrases", "time"] },
+            { russian: "Который час?", pronunciation: "[kotoriy tchas?]", translation: "Quelle heure est-il ?", categories: ["phrases", "time"] },
+            { russian: "Я хочу спать", pronunciation: "[ya khatchou spat]", translation: "Je veux dormir", categories: ["phrases", "basics"] },
+            { russian: "Я голоден", pronunciation: "[ya galodien]", translation: "J'ai faim", categories: ["phrases", "basics"] },
+            { russian: "Я хочу пить", pronunciation: "[ya khatchou pit]", translation: "J'ai soif", categories: ["phrases", "basics"] },
+            { russian: "Мне холодно", pronunciation: "[mnié kholodna]", translation: "J'ai froid", categories: ["phrases", "basics"] },
+            { russian: "Мне жарко", pronunciation: "[mnié jarka]", translation: "J'ai chaud", categories: ["phrases", "basics"] },
+
+            // Expressions de quantité
+            { russian: "много", pronunciation: "[mnoga]", translation: "beaucoup", categories: ["phrases", "basics"] },
+            { russian: "мало", pronunciation: "[mala]", translation: "peu", categories: ["phrases", "basics"] },
+            { russian: "немного", pronunciation: "[niemnoga]", translation: "un peu", categories: ["phrases", "basics"] },
+            { russian: "слишком много", pronunciation: "[slichkom mnoga]", translation: "trop", categories: ["phrases", "basics"] },
+
+            // Phrases pour apprendre
+            { russian: "Как сказать...?", pronunciation: "[kak skazat...?]", translation: "Comment dit-on... ?", categories: ["phrases", "basics"] },
+            { russian: "Что значит...?", pronunciation: "[chto znatchit...?]", translation: "Que signifie... ?", categories: ["phrases", "basics"] },
+            { russian: "Как пишется...?", pronunciation: "[kak pichètsa...?]", translation: "Comment écrit-on... ?", categories: ["phrases", "basics"] },
+
+            // Verbes de base supplémentaires
+            { russian: "делать", pronunciation: "[dielat]", translation: "faire", categories: ["basics"] },
+            { russian: "идти", pronunciation: "[idti]", translation: "aller (à pied)", categories: ["basics", "travel"] },
+            { russian: "ехать", pronunciation: "[yèkhat]", translation: "aller (en transport)", categories: ["basics", "travel"] },
+            { russian: "покупать", pronunciation: "[pakoupat]", translation: "acheter", categories: ["basics", "shopping"] },
+            { russian: "продавать", pronunciation: "[pradavat]", translation: "vendre", categories: ["basics", "shopping"] },
+            { russian: "помогать", pronunciation: "[pamagat]", translation: "aider", categories: ["basics"] },
+            { russian: "изучать", pronunciation: "[izoutchat]", translation: "étudier", categories: ["basics", "work"] }
+        ];
+
+        // Variables globales (identiques à celles du document original)
+        let currentCategory = "all";
+        let allTranslationsHidden = false;
+        let allPronunciationsHidden = false;
+        let allRussianHidden = false;
+        let hiddenWords = new Set();
+
+        // Fonctions (identiques à celles du document original)
+        function initializeApp() {
+            updateVocabularyDisplay();
+            setupEventListeners();
+            updateWordCounters();
+        }
+
+        function setupEventListeners() {
+            // Filtres de catégorie
+            document.querySelectorAll('.category-filter').forEach(filter => {
+                filter.addEventListener('click', function() {
+                    document.querySelectorAll('.category-filter').forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    currentCategory = this.getAttribute('data-category');
+                    document.getElementById('current-category').textContent = 
+                        this.textContent === 'Tous' ? 'Tous les mots' : this.textContent;
+                    
+                    updateVocabularyDisplay();
+                });
+            });
+
+            // Recherche de vocabulaire
+            document.getElementById('vocab-search').addEventListener('input', function() {
+                updateVocabularyDisplay();
+            });
+
+            // Bouton remonter en haut
+            window.addEventListener('scroll', function() {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    document.getElementById('back-to-top').classList.add('visible');
+                } else {
+                    document.getElementById('back-to-top').classList.remove('visible');
+                }
+            });
+
+            document.getElementById('back-to-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+
+            // Basculer le thème clair/sombre
+            document.getElementById('theme-toggle').addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                this.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            });
+
+            // Contrôles de masquage/affichage
+            document.getElementById('hide-all-translations').addEventListener('click', function() {
+                document.querySelectorAll('.translation').forEach(translation => {
+                    translation.classList.add('hidden-translation');
+                });
+                allTranslationsHidden = true;
+            });
+
+            document.getElementById('show-all-translations').addEventListener('click', function() {
+                document.querySelectorAll('.translation').forEach(translation => {
+                    translation.classList.remove('hidden-translation');
+                });
+                allTranslationsHidden = false;
+            });
+            
+            document.getElementById('hide-all-pronunciations').addEventListener('click', function() {
+                document.querySelectorAll('.pronunciation').forEach(pronunciation => {
+                    pronunciation.classList.add('hidden-pronunciation');
+                });
+                allPronunciationsHidden = true;
+            });
+
+            document.getElementById('show-all-pronunciations').addEventListener('click', function() {
+                document.querySelectorAll('.pronunciation').forEach(pronunciation => {
+                    pronunciation.classList.remove('hidden-pronunciation');
+                });
+                allPronunciationsHidden = false;
+            });
+            
+            document.getElementById('hide-all-russian').addEventListener('click', function() {
+                document.querySelectorAll('.russian-word').forEach(russianWord => {
+                    russianWord.classList.add('hidden-russian');
+                });
+                allRussianHidden = true;
+            });
+
+            document.getElementById('show-all-russian').addEventListener('click', function() {
+                document.querySelectorAll('.russian-word').forEach(russianWord => {
+                    russianWord.classList.remove('hidden-russian');
+                });
+                allRussianHidden = false;
+            });
+            
+            document.getElementById('restore-all-words').addEventListener('click', function() {
+                hiddenWords.clear();
+                updateVocabularyDisplay();
+                updateWordCounters();
+            });
+        }
+
+        function updateVocabularyDisplay() {
+            const searchTerm = document.getElementById('vocab-search').value.toLowerCase();
+            
+            const filtered = vocabulary.filter(word => {
+                const matchesCategory = currentCategory === 'all' || word.categories.includes(currentCategory);
+                const matchesSearch = 
+                    word.russian.toLowerCase().includes(searchTerm) ||
+                    word.pronunciation.toLowerCase().includes(searchTerm) ||
+                    word.translation.toLowerCase().includes(searchTerm);
+                const isVisible = !hiddenWords.has(word.russian);
+                
+                return matchesCategory && matchesSearch && isVisible;
+            });
+            
+            const container = document.getElementById('vocab-container');
+            container.innerHTML = '';
+            
+            filtered.forEach(word => {
+                const card = document.createElement('div');
+                card.className = 'vocab-card';
+                card.dataset.word = word.russian;
+                card.dataset.categories = word.categories.join(',');
+                
+                const cardContent = `
+                    <div class="card-controls">
+                        <button class="card-btn toggle-russian-btn" title="Masquer/Afficher le mot russe">🇷🇺</button>
+                        <button class="card-btn toggle-pronunciation-btn" title="Masquer/Afficher la prononciation">🔊</button>
+                        <button class="card-btn toggle-translation-btn" title="Masquer/Afficher la traduction">👁️</button>
+                        <button class="card-btn remove-word-btn" title="Masquer ce mot">❌</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="russian-word ${allRussianHidden ? 'hidden-russian' : ''}">${word.russian}</div>
+                        <div class="pronunciation ${allPronunciationsHidden ? 'hidden-pronunciation' : ''}">${word.pronunciation}</div>
+                        <div class="translation ${allTranslationsHidden ? 'hidden-translation' : ''}">${word.translation}</div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">
+                            ${word.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                card.innerHTML = cardContent;
+                container.appendChild(card);
+                
+                // Écouteurs d'événements pour les boutons
+                card.querySelector('.toggle-russian-btn').addEventListener('click', function() {
+                    const russianWord = this.closest('.vocab-card').querySelector('.russian-word');
+                    russianWord.classList.toggle('hidden-russian');
+                });
+                
+                card.querySelector('.toggle-pronunciation-btn').addEventListener('click', function() {
+                    const pronunciation = this.closest('.vocab-card').querySelector('.pronunciation');
+                    pronunciation.classList.toggle('hidden-pronunciation');
+                });
+                
+                card.querySelector('.toggle-translation-btn').addEventListener('click', function() {
+                    const translation = this.closest('.vocab-card').querySelector('.translation');
+                    translation.classList.toggle('hidden-translation');
+                });
+                
+                card.querySelector('.remove-word-btn').addEventListener('click', function() {
+                    const russian = this.closest('.vocab-card').dataset.word;
+                    hiddenWords.add(russian);
+                    this.closest('.vocab-card').remove();
+                    updateWordCounters();
+                });
+            });
+            
+            document.getElementById('current-category').textContent = 
+                `${currentCategory === 'all' ? 'Tous les mots' : document.querySelector(`.category-filter[data-category="${currentCategory}"]`).textContent} (${filtered.length})`;
+                
+            updateWordCounters();
+        }
+        
+        function updateWordCounters() {
+            const totalWords = vocabulary.length;
+            const hiddenWordsCount = hiddenWords.size;
+            const visibleWordsCount = totalWords - hiddenWordsCount;
+            
+            document.getElementById('hidden-words-count').textContent = hiddenWordsCount;
+            document.getElementById('visible-words-count').textContent = visibleWordsCount;
+        }
+
+        // Initialiser l'application
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
