@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Cyrillique - Apprendre le Russe</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #c53030;
+            --accent: #5a67d8;
+            --light: #f7fafc;
+            --dark: #2d3748;
+            --russe: #c53030;
+            --francais: #3182ce;
+            --background: #f0f5ff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: var(--secondary);
+        }
+        
+        .flag-colors {
+            display: flex;
+            height: 10px;
+            margin: 20px auto 0;
+            width: 200px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .flag-white { background: white; flex: 1; }
+        .flag-blue { background: #0039A6; flex: 1; }
+        .flag-red { background: #D52B1E; flex: 1; }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .info-box {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .letter-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .letter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .letter-card.similar { border-left: 4px solid #38a169; }
+        .letter-card.different { border-left: 4px solid #e53e3e; }
+        .letter-card.unique { border-left: 4px solid #d69e2e; }
+        
+        .letter-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--russe);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .pronunciation {
+            font-size: 1.2rem;
+            color: var(--dark);
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .example {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .word-examples {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .word-example {
+            margin-bottom: 0.5rem;
+        }
+        
+        .word {
+            color: var(--russe);
+            font-weight: bold;
+        }
+        
+        .word-pronunciation {
+            color: var(--dark);
+            font-style: italic;
+        }
+        
+        .word-translation {
+            color: var(--francais);
+        }
+        
+        .letter-type {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .similar .letter-type {
+            background-color: #38a16922;
+            color: #38a169;
+        }
+        
+        .different .letter-type {
+            background-color: #e53e3e22;
+            color: #e53e3e;
+        }
+        
+        .unique .letter-type {
+            background-color: #d69e2e22;
+            color: #d69e2e;
+        }
+        
+        .section-tabs {
+            display: flex;
+            overflow-x: auto;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .section-tab {
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            background-color: #e2e8f0;
+            border-radius: 5px 5px 0 0;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .section-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .section-content {
+            display: none;
+        }
+        
+        .section-content.active {
+            display: block;
+        }
+        
+        .search-bar {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .alphabet-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+            
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+            h3 { font-size: 1.3rem; }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-btn {
+                width: 90%;
+                text-align: center;
+                margin: 2px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .alphabet-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .letter-display {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>L'Alphabet Russe</h1>
+            <p>Un guide simple pour apprendre le cyrillique</p>
+            <div class="flag-colors">
+                <div class="flag-white"></div>
+                <div class="flag-blue"></div>
+                <div class="flag-red"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navigation">
+        <div class="container">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Accueil</a>
+                <a href="alphabet.html" class="nav-btn active">🔤 Alphabet Cyrillique</a>
+                <a href="vocabulaire.html" class="nav-btn">📚 Vocabulaire</a>
+                <a href="index.html#programme" class="nav-btn">📅 Programme 21 jours</a>
+                <a href="index.html#ressources" class="nav-btn">🔗 Ressources</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchLetters" placeholder="Rechercher une lettre..." oninput="filterLetters()">
+        </div>
+        
+        <div class="section-tabs">
+            <div class="section-tab active" onclick="showSection('all-letters')">Toutes les lettres</div>
+            <div class="section-tab" onclick="showSection('similar-letters')">Lettres similaires au français</div>
+            <div class="section-tab" onclick="showSection('different-letters')">Lettres pièges</div>
+            <div class="section-tab" onclick="showSection('unique-letters')">Lettres uniques</div>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-title">À propos de l'alphabet cyrillique</div>
+            <p>L'alphabet cyrillique russe comporte 33 lettres. Il tire son nom de Saint Cyrille, un moine byzantin du IXe siècle qui, avec son frère Méthode, a créé le premier alphabet slave pour traduire des textes religieux.</p>
+            <p>L'apprentissage de l'alphabet russe peut sembler intimidant au premier abord, mais il devient beaucoup plus facile lorsqu'on remarque que certaines lettres sont identiques à celles de l'alphabet latin, d'autres ressemblent à des lettres latines mais se prononcent différemment, et enfin certaines sont complètement nouvelles.</p>
+        </div>
+        
+        <section id="all-letters" class="section-content active">
+            <h2>L'alphabet complet</h2>
+            <div class="alphabet-grid">
+                <!-- Lettres identiques à l'alphabet latin -->
+                <div class="letter-card similar" data-letter="А а">
+                    <span class="letter-type">Identique</span>
+                    <div class="letter-display">
+                        <span>А</span>
+                        <span>а</span>
+                    </div>
+                    <div class="pronunciation">[a]</div>
+                    <div class="example">comme dans "papa"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">ананас</span>
+                            <span class="word-pronunciation">[ananas]</span>
+                            <span class="word-translation">- ananas</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">автобус</span>
+                            <span class="word-pronunciation">[aftabus]</span>
+                            <span class="word-translation">- bus</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card similar" data-letter="К к">
+                    <span class="letter-type">Identique</span>
+                    <div class="letter-display">
+                        <span>К</span>
+                        <span>к</span>
+                    </div>
+                    <div class="pronunciation">[k]</div>
+                    <div class="example">comme dans "képi"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">кот</span>
+                            <span class="word-pronunciation">[kot]</span>
+                            <span class="word-translation">- chat</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">кофе</span>
+                            <span class="word-pronunciation">[kofié]</span>
+                            <span class="word-translation">- café</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card similar" data-letter="М м">
+                    <span class="letter-type">Identique</span>
+                    <div class="letter-display">
+                        <span>М</span>
+                        <span>м</span>
+                    </div>
+                    <div class="pronunciation">[m]</div>
+                    <div class="example">comme dans "maman"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">мама</span>
+                            <span class="word-pronunciation">[mama]</span>
+                            <span class="word-translation">- maman</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">метро</span>
+                            <span class="word-pronunciation">[mitra]</span>
+                            <span class="word-translation">- métro</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card similar" data-letter="О о">
+                    <span class="letter-type">Identique</span>
+                    <div class="letter-display">
+                        <span>О</span>
+                        <span>о</span>
+                    </div>
+                    <div class="pronunciation">[o]</div>
+                    <div class="example">comme dans "mot"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">окно</span>
+                            <span class="word-pronunciation">[akno]</span>
+                            <span class="word-translation">- fenêtre</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">дом</span>
+                            <span class="word-pronunciation">[dom]</span>
+                            <span class="word-translation">- maison</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card similar" data-letter="Т т">
+                    <span class="letter-type">Identique</span>
+                    <div class="letter-display">
+                        <span>Т</span>
+                        <span>т</span>
+                    </div>
+                    <div class="pronunciation">[t]</div>
+                    <div class="example">comme dans "ton"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">там</span>
+                            <span class="word-pronunciation">[tam]</span>
+                            <span class="word-translation">- là-bas</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">стол</span>
+                            <span class="word-pronunciation">[stol]</span>
+                            <span class="word-translation">- table</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lettres pièges -->
+                <div class="letter-card different" data-letter="В в">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>В</span>
+                        <span>в</span>
+                    </div>
+                    <div class="pronunciation">[v]</div>
+                    <div class="example">comme dans "vous" (ressemble à "B" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">вода</span>
+                            <span class="word-pronunciation">[vada]</span>
+                            <span class="word-translation">- eau</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">вот</span>
+                            <span class="word-pronunciation">[vot]</span>
+                            <span class="word-translation">- voici</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card different" data-letter="Н н">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>Н</span>
+                        <span>н</span>
+                    </div>
+                    <div class="pronunciation">[n]</div>
+                    <div class="example">comme dans "non" (ressemble à "H" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">нос</span>
+                            <span class="word-pronunciation">[nos]</span>
+                            <span class="word-translation">- nez</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">ночь</span>
+                            <span class="word-pronunciation">[notch]</span>
+                            <span class="word-translation">- nuit</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card different" data-letter="Р р">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>Р</span>
+                        <span>р</span>
+                    </div>
+                    <div class="pronunciation">[r]</div>
+                    <div class="example">roulé (ressemble à "P" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">рука</span>
+                            <span class="word-pronunciation">[rouka]</span>
+                            <span class="word-translation">- main</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">рыба</span>
+                            <span class="word-pronunciation">[ryba]</span>
+                            <span class="word-translation">- poisson</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card different" data-letter="С с">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>С</span>
+                        <span>с</span>
+                    </div>
+                    <div class="pronunciation">[s]</div>
+                    <div class="example">comme dans "savoir" (ressemble à "C" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">сок</span>
+                            <span class="word-pronunciation">[sok]</span>
+                            <span class="word-translation">- jus</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">суп</span>
+                            <span class="word-pronunciation">[soup]</span>
+                            <span class="word-translation">- soupe</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card different" data-letter="У у">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>У</span>
+                        <span>у</span>
+                    </div>
+                    <div class="pronunciation">[ou]</div>
+                    <div class="example">comme dans "loup" (ressemble à "Y" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">утро</span>
+                            <span class="word-pronunciation">[outra]</span>
+                            <span class="word-translation">- matin</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">ухо</span>
+                            <span class="word-pronunciation">[oukha]</span>
+                            <span class="word-translation">- oreille</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="letter-card different" data-letter="Х х">
+                    <span class="letter-type">Piège</span>
+                    <div class="letter-display">
+                        <span>Х</span>
+                        <span>х</span>
+                    </div>
+                    <div class="pronunciation">[kh]</div>
+                    <div class="example">comme la "jota" espagnole (ressemble à "X" latin)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">хлеб</span>
+                            <span class="word-pronunciation">[khlièb]</span>
+                            <span class="word-translation">- pain</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">хорошо</span>
+                            <span class="word-pronunciation">[kharacho]</span>
+                            <span class="word-translation">- bien</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lettres cyrilliques uniques -->
+                <div class="letter-card unique" data-letter="Б б">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Б</span>
+                        <span>б</span>
+                    </div>
+                    <div class="pronunciation">[b]</div>
+                    <div class="example">comme dans "bon"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">брат</span>
+                            <span class="word-pronunciation">[brat]</span>
+                            <span class="word-translation">- frère</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">банан</span>
+                            <span class="word-pronunciation">[banan]</span>
+                            <span class="word-translation">- banane</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Г г">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Г</span>
+                        <span>г</span>
+                    </div>
+                    <div class="pronunciation">[g]</div>
+                    <div class="example">comme dans "gare"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">город</span>
+                            <span class="word-pronunciation">[gorad]</span>
+                            <span class="word-translation">- ville</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">глаз</span>
+                            <span class="word-pronunciation">[glaz]</span>
+                            <span class="word-translation">- œil</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Д д">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Д</span>
+                        <span>д</span>
+                    </div>
+                    <div class="pronunciation">[d]</div>
+                    <div class="example">comme dans "dans"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">да</span>
+                            <span class="word-pronunciation">[da]</span>
+                            <span class="word-translation">- oui</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">дом</span>
+                            <span class="word-pronunciation">[dom]</span>
+                            <span class="word-translation">- maison</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Е е">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Е</span>
+                        <span>е</span>
+                    </div>
+                    <div class="pronunciation">[ye]</div>
+                    <div class="example">comme dans "yéti"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">ем</span>
+                            <span class="word-pronunciation">[yem]</span>
+                            <span class="word-translation">- je mange</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">есть</span>
+                            <span class="word-pronunciation">[yest']</span>
+                            <span class="word-translation">- il y a</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ё ё">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ё</span>
+                        <span>ё</span>
+                    </div>
+                    <div class="pronunciation">[yo]</div>
+                    <div class="example">comme dans "yoga"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">ёж</span>
+                            <span class="word-pronunciation">[yoj]</span>
+                            <span class="word-translation">- hérisson</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">ёлка</span>
+                            <span class="word-pronunciation">[yolka]</span>
+                            <span class="word-translation">- sapin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ж ж">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ж</span>
+                        <span>ж</span>
+                    </div>
+                    <div class="pronunciation">[j]</div>
+                    <div class="example">comme dans "journal" (plus appuyé)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">жена</span>
+                            <span class="word-pronunciation">[jena]</span>
+                            <span class="word-translation">- femme (épouse)</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">жук</span>
+                            <span class="word-pronunciation">[jouk]</span>
+                            <span class="word-translation">- scarabée</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="З з">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>З</span>
+                        <span>з</span>
+                    </div>
+                    <div class="pronunciation">[z]</div>
+                    <div class="example">comme dans "zoo"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">зуб</span>
+                            <span class="word-pronunciation">[zoub]</span>
+                            <span class="word-translation">- dent</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">зима</span>
+                            <span class="word-pronunciation">[zima]</span>
+                            <span class="word-translation">- hiver</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="И и">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>И</span>
+                        <span>и</span>
+                    </div>
+                    <div class="pronunciation">[i]</div>
+                    <div class="example">comme dans "lit"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">имя</span>
+                            <span class="word-pronunciation">[imya]</span>
+                            <span class="word-translation">- prénom</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">игра</span>
+                            <span class="word-pronunciation">[igra]</span>
+                            <span class="word-translation">- jeu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Й й">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Й</span>
+                        <span>й</span>
+                    </div>
+                    <div class="pronunciation">[y court]</div>
+                    <div class="example">comme dans "yaourt" (plus bref)</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">йод</span>
+                            <span class="word-pronunciation">[yod]</span>
+                            <span class="word-translation">- iode</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">чай</span>
+                            <span class="word-pronunciation">[tchaï]</span>
+                            <span class="word-translation">- thé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Л л">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Л</span>
+                        <span>л</span>
+                    </div>
+                    <div class="pronunciation">[l]</div>
+                    <div class="example">comme dans "livre"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">лук</span>
+                            <span class="word-pronunciation">[louk]</span>
+                            <span class="word-translation">- oignon</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">луна</span>
+                            <span class="word-pronunciation">[louna]</span>
+                            <span class="word-translation">- lune</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="П п">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>П</span>
+                        <span>п</span>
+                    </div>
+                    <div class="pronunciation">[p]</div>
+                    <div class="example">comme dans "papa"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">папа</span>
+                            <span class="word-pronunciation">[papa]</span>
+                            <span class="word-translation">- papa</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">парк</span>
+                            <span class="word-pronunciation">[park]</span>
+                            <span class="word-translation">- parc</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ф ф">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ф</span>
+                        <span>ф</span>
+                    </div>
+                    <div class="pronunciation">[f]</div>
+                    <div class="example">comme dans "fort"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">факт</span>
+                            <span class="word-pronunciation">[fakt]</span>
+                            <span class="word-translation">- fait</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">форма</span>
+                            <span class="word-pronunciation">[forma]</span>
+                            <span class="word-translation">- forme</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ц ц">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ц</span>
+                        <span>ц</span>
+                    </div>
+                    <div class="pronunciation">[ts]</div>
+                    <div class="example">comme dans "tsarine"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">цена</span>
+                            <span class="word-pronunciation">[tsina]</span>
+                            <span class="word-translation">- prix</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">центр</span>
+                            <span class="word-pronunciation">[tsentr]</span>
+                            <span class="word-translation">- centre</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ч ч">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ч</span>
+                        <span>ч</span>
+                    </div>
+                    <div class="pronunciation">[tch]</div>
+                    <div class="example">comme dans "tchèque"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">час</span>
+                            <span class="word-pronunciation">[tchas]</span>
+                            <span class="word-translation">- heure</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">чай</span>
+                            <span class="word-pronunciation">[tchaï]</span>
+                            <span class="word-translation">- thé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ш ш">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ш</span>
+                        <span>ш</span>
+                    </div>
+                    <div class="pronunciation">[ch]</div>
+                    <div class="example">comme dans "chat"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">шум</span>
+                            <span class="word-pronunciation">[choum]</span>
+                            <span class="word-translation">- bruit</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">школа</span>
+                            <span class="word-pronunciation">[chkola]</span>
+                            <span class="word-translation">- école</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Щ щ">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Щ</span>
+                        <span>щ</span>
+                    </div>
+                    <div class="pronunciation">[sch]</div>
+                    <div class="example">comme "ch" mais plus doux et long</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">щека</span>
+                            <span class="word-pronunciation">[schika]</span>
+                            <span class="word-translation">- joue</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">борщ</span>
+                            <span class="word-pronunciation">[borsch]</span>
+                            <span class="word-translation">- bortsch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ъ ъ">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ъ</span>
+                        <span>ъ</span>
+                    </div>
+                    <div class="pronunciation">[signe dur]</div>
+                    <div class="example">modifie la prononciation</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">объект</span>
+                            <span class="word-pronunciation">[obyèkt]</span>
+                            <span class="word-translation">- objet</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">подъезд</span>
+                            <span class="word-pronunciation">[podyèzd]</span>
+                            <span class="word-translation">- entrée d'immeuble</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ы ы">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ы</span>
+                        <span>ы</span>
+                    </div>
+                    <div class="pronunciation">[i dur]</div>
+                    <div class="example">son spécifique au russe</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">ты</span>
+                            <span class="word-pronunciation">[ti]</span>
+                            <span class="word-translation">- tu</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">мы</span>
+                            <span class="word-pronunciation">[mi]</span>
+                            <span class="word-translation">- nous</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ь ь">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ь</span>
+                        <span>ь</span>
+                    </div>
+                    <div class="pronunciation">[signe mou]</div>
+                    <div class="example">adoucit la consonne précédente</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">день</span>
+                            <span class="word-pronunciation">[dien']</span>
+                            <span class="word-translation">- jour</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">мать</span>
+                            <span class="word-pronunciation">[mat']</span>
+                            <span class="word-translation">- mère</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Э э">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Э</span>
+                        <span>э</span>
+                    </div>
+                    <div class="pronunciation">[è]</div>
+                    <div class="example">comme dans "père"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">это</span>
+                            <span class="word-pronunciation">[èta]</span>
+                            <span class="word-translation">- ce, ceci</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">эхо</span>
+                            <span class="word-pronunciation">[èkha]</span>
+                            <span class="word-translation">- écho</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Ю ю">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Ю</span>
+                        <span>ю</span>
+                    </div>
+                    <div class="pronunciation">[you]</div>
+                    <div class="example">comme dans "youth"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">юг</span>
+                            <span class="word-pronunciation">[youg]</span>
+                            <span class="word-translation">- sud</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">юмор</span>
+                            <span class="word-pronunciation">[youmor]</span>
+                            <span class="word-translation">- humour</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="letter-card unique" data-letter="Я я">
+                    <span class="letter-type">Cyrillique</span>
+                    <div class="letter-display">
+                        <span>Я</span>
+                        <span>я</span>
+                    </div>
+                    <div class="pronunciation">[ya]</div>
+                    <div class="example">comme dans "yacht"</div>
+                    <div class="word-examples">
+                        <div class="word-example">
+                            <span class="word">я</span>
+                            <span class="word-pronunciation">[ya]</span>
+                            <span class="word-translation">- je</span>
+                        </div>
+                        <div class="word-example">
+                            <span class="word">яблоко</span>
+                            <span class="word-pronunciation">[yablaka]</span>
+                            <span class="word-translation">- pomme</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="similar-letters" class="section-content">
+            <h2>Lettres similaires à l'alphabet latin</h2>
+            <p>Ces lettres ont la même forme et la même prononciation que dans l'alphabet latin, ce qui les rend faciles à retenir.</p>
+            <div class="alphabet-grid" id="similar-grid"></div>
+        </section>
+        
+        <section id="different-letters" class="section-content">
+            <h2>Lettres pièges</h2>
+            <p>Ces lettres ressemblent à des lettres de l'alphabet latin mais se prononcent différemment. Attention aux pièges !</p>
+            <div class="alphabet-grid" id="different-grid"></div>
+        </section>
+        
+        <section id="unique-letters" class="section-content">
+            <h2>Lettres uniques au cyrillique</h2>
+            <p>Ces lettres sont spécifiques à l'alphabet cyrillique et n'ont pas d'équivalent direct dans l'alphabet latin.</p>
+            <div class="alphabet-grid" id="unique-grid"></div>
+        </section>
+        
+        <div class="info-box">
+            <div class="info-title">Astuces pour l'apprentissage</div>
+            <p>Pour mémoriser plus facilement l'alphabet cyrillique, essayez ces méthodes :</p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Commencez par les lettres identiques à l'alphabet latin (А, К, М, О, Т)</li>
+                <li>Puis apprenez les lettres qui ressemblent à des lettres latines mais se prononcent différemment</li>
+                <li>Enfin, abordez les lettres spécifiques au cyrillique</li>
+                <li>Pratiquez l'écriture de chaque lettre plusieurs fois</li>
+                <li>Essayez de lire des mots simples et des phrases courtes</li>
+                <li>Utilisez des applications comme Anki pour réviser régulièrement</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>Guide d'apprentissage de l'alphabet russe</p>
+            <p>Une méthode progressive pour maîtriser le cyrillique</p>
+        </div>
+    </footer>
+    
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section-content');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            
+            const tabs = document.querySelectorAll('.section-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            const activeTab = Array.from(tabs).find(tab => tab.getAttribute('onclick').includes(sectionId));
+            if (activeTab) activeTab.classList.add('active');
+        }
+        
+        function filterLetters() {
+            const searchTerm = document.getElementById('searchLetters').value.toLowerCase();
+            const letterCards = document.querySelectorAll('.letter-card');
+            
+            letterCards.forEach(card => {
+                const letterText = card.getAttribute('data-letter').toLowerCase();
+                const cardContent = card.textContent.toLowerCase();
+                
+                if (letterText.includes(searchTerm) || cardContent.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        function populateCategoryGrids() {
+            const similarLetters = document.querySelectorAll('.letter-card.similar');
+            const differentLetters = document.querySelectorAll('.letter-card.different');
+            const uniqueLetters = document.querySelectorAll('.letter-card.unique');
+            
+            similarLetters.forEach(letter => {
+                const clone = letter.cloneNode(true);
+                document.getElementById('similar-grid').appendChild(clone);
+            });
+            
+            differentLetters.forEach(letter => {
+                const clone = letter.cloneNode(true);
+                document.getElementById('different-grid').appendChild(clone);
+            });
+            
+            uniqueLetters.forEach(letter => {
+                const clone = letter.cloneNode(true);
+                document.getElementById('unique-grid').appendChild(clone);
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', populateCategoryGrids);
+    </script>
+</body>
+</html>
