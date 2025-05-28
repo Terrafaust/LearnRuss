@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Variables CSS pour les couleurs et espacements */
+        /* Variables CSS pour les couleurs et espacements (Light Mode) */
         :root {
             --primary: #1e3a8a; /* Bleu foncé */
             --secondary: #c53030; /* Rouge russe */
@@ -27,6 +27,67 @@
             --text-secondary: #718096; /* Texte secondaire */
             --border-color: #e2e8f0; /* Couleur de bordure */
             --red-highlight: #e53e3e; /* Rouge spécifique pour le bouton actif du programme */
+            --header-bg-gradient: linear-gradient(135deg, #1e3a8a, #5a67d8);
+            --header-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --card-hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            --card-hover-background: #e6f2ff;
+            --note-box-background: #e6fffa;
+            --exercise-background: #f0f4f8;
+            --dialogue-box-background: #f8f9fa;
+            --recap-list-background: #f0f4ff;
+            --congrats-background: #d4f1d4;
+            --progress-bar-background: #e2e8f0;
+            --progress-fill-gradient: linear-gradient(90deg, #38a169, #5a67d8);
+            --footer-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            --main-nav-bg: #2c3e50;
+            --main-nav-hover-bg: rgba(255,255,255,0.1);
+            --main-nav-active-bg: var(--accent);
+            --sticky-header-bg: var(--primary);
+            --sticky-header-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            --sticky-btn-bg: rgba(255, 255, 255, 0.1);
+            --sticky-btn-hover-bg: rgba(255, 255, 255, 0.2);
+            --sticky-tab-btn-bg: rgba(255, 255, 255, 0.2);
+            --sticky-tab-btn-hover-bg: rgba(255, 255, 255, 0.3);
+            --sticky-tab-btn-active-bg: var(--primary);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --primary: #3b82f6; /* Bleu plus clair pour le mode nuit */
+            --secondary: #ef4444; /* Rouge plus clair */
+            --accent: #818cf8; /* Violet/Bleu plus clair */
+            --light: #1f2937; /* Fond très sombre */
+            --dark: #f9fafb; /* Texte très clair */
+            --russe: #f87171; /* Rouge plus clair pour le texte russe */
+            --francais: #60a5fa; /* Bleu plus clair pour le texte français */
+            --bg-primary: #111827; /* Fond principal sombre */
+            --bg-secondary: #1e293b; /* Fond secondaire sombre */
+            --text-primary: #f9fafb; /* Texte principal clair */
+            --text-secondary: #d1d5db; /* Texte secondaire clair */
+            --border-color: #374151; /* Couleur de bordure sombre */
+            --red-highlight: #dc2626; /* Rouge plus foncé pour le bouton actif du programme */
+            --header-bg-gradient: linear-gradient(135deg, #1f2937, #374151);
+            --header-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --card-hover-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            --card-hover-background: #2d3748;
+            --note-box-background: #2a4365;
+            --exercise-background: #2d3748;
+            --dialogue-box-background: #252f3f;
+            --recap-list-background: #2a4365;
+            --congrats-background: #2f855a;
+            --progress-bar-background: #4b5563;
+            --progress-fill-gradient: linear-gradient(90deg, #10b981, #6366f1);
+            --footer-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+            --main-nav-bg: #1f2937;
+            --main-nav-hover-bg: rgba(255,255,255,0.05);
+            --main-nav-active-bg: var(--accent);
+            --sticky-header-bg: #1f2937;
+            --sticky-header-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            --sticky-btn-bg: rgba(255, 255, 255, 0.05);
+            --sticky-btn-hover-bg: rgba(255, 255, 255, 0.1);
+            --sticky-tab-btn-bg: rgba(255, 255, 255, 0.1);
+            --sticky-tab-btn-hover-bg: rgba(255, 255, 255, 0.2);
+            --sticky-tab-btn-active-bg: var(--primary);
         }
         
         /* Réinitialisation des styles par défaut et box-sizing */
@@ -41,10 +102,10 @@
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
-            background: #f0f5ff; /* Fond légèrement bleuté */
+            background: var(--bg-primary); /* Utilisation de la variable */
             min-height: 100vh;
             scroll-behavior: smooth; /* Défilement doux */
-            transition: padding-top 0.5s ease-in-out; /* Smooth transition for body padding */
+            transition: background 0.5s ease-in-out, color 0.5s ease-in-out, padding-top 0.5s ease-in-out; /* Smooth transition for body padding and theme */
         }
         
         /* Conteneur principal pour centrer le contenu */
@@ -56,11 +117,11 @@
         
         /* En-tête de la page */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--accent)); /* Dégradé de couleurs */
+            background: var(--header-bg-gradient); /* Dégradé de couleurs */
             color: white;
             padding: 30px 0 20px; /* Ajusté le padding-bottom */
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            box-shadow: var(--header-shadow); /* Ombre légère */
             display: flex; /* Utilisation de flexbox pour l'alignement */
             flex-direction: column; /* Disposition verticale par default */
             align-items: center; /* Centrer les éléments horizontalement */
@@ -78,6 +139,7 @@
             max-width: 1100px; /* Correspond à la largeur du conteneur principal */
             padding: 0 20px;
             flex-wrap: wrap; /* Permet le retour à la ligne sur les petits écrans */
+            transition: all 0.5s ease-in-out; /* Smooth transition */
         }
 
         .header-left {
@@ -133,24 +195,32 @@
         .flag-blue { background: #0039A6; flex: 1; }
         .flag-red { background: #D52B1E; flex: 1; }
         
-        /* Navigation principale */
-        .main-navigation {
-            background: #2c3e50; /* Couleur de fond sombre */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            position: sticky; /* Reste en haut lors du défilement */
-            top: 0;
-            z-index: 100; /* Assure qu'il est au-dessus des autres éléments */
-            transition: all 0.5s ease-in-out; /* Smooth transition for position and shadow */
-        }
-        
-        .nav-container {
+        /* Navigation principale du site (Accueil, Alphabet, etc.) */
+        .header-nav-links {
             display: flex;
-            justify-content: center; /* Centrer les éléments de navigation */
+            justify-content: center;
+            width: 100%;
+            max-width: 1100px;
             padding: 10px 0;
-            flex-wrap: wrap; /* Permet aux éléments de passer à la ligne */
+            flex-wrap: wrap;
+            background: var(--main-nav-bg); /* Couleur de fond sombre */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border-radius: 5px; /* Rounded corners for the nav bar */
+            margin-top: 20px; /* Space below header content */
+            opacity: 0; /* Initially hidden */
+            max-height: 0; /* Collapse height */
+            overflow: hidden; /* Hide content during collapse */
+            transition: all 0.5s ease-in-out; /* Smooth transition */
+            visibility: hidden; /* Hide from screen readers when collapsed */
+            position: absolute; /* Position for transition */
+            top: 0; /* Will be adjusted by JS */
+            left: 50%;
+            transform: translateX(-50%) scale(0.8); /* Start smaller */
+            transform-origin: center center;
+            pointer-events: none; /* Prevent interaction when hidden */
         }
-        
-        .nav-item {
+
+        .header-nav-links .nav-item {
             color: white;
             text-decoration: none;
             padding: 10px 15px;
@@ -160,18 +230,18 @@
             transition: background 0.3s; /* Transition douce au survol */
         }
         
-        .nav-item:hover {
-            background: rgba(255,255,255,0.1); /* Effet de survol */
+        .header-nav-links .nav-item:hover {
+            background: var(--main-nav-hover-bg); /* Effet de survol */
         }
         
-        .nav-item.active {
-            background: var(--accent); /* Couleur active par défaut */
+        .header-nav-links .nav-item.active {
+            background: var(--main-nav-active-bg); /* Couleur active par défaut */
         }
 
-        .nav-item.active-program {
+        .header-nav-links .nav-item.active-program {
             background: var(--red-highlight); /* Couleur rouge spécifique pour le programme actif */
         }
-        
+
         /* Section selector pour les semaines (maintenant dans le header-right) */
         .section-selector {
             display: flex;
@@ -214,7 +284,7 @@
             background: rgba(255, 255, 255, 0.4); /* Effet de survol */
         }
         
-        .section-btn.active {
+        .section-btn.active-week { /* Nouveau style pour la semaine active */
             background: var(--secondary); /* Couleur active (rouge) */
             color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -258,7 +328,7 @@
             background: rgba(255, 255, 255, 0.3); /* Effet de survol */
         }
         
-        .tab-btn.active {
+        .tab-btn.active-day { /* Nouveau style pour le jour actif */
             background: var(--primary); /* Couleur active (bleu foncé) */
             color: white;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -317,17 +387,17 @@
         
         /* Cartes de contenu */
         .card {
-            background: white;
+            background: var(--bg-primary); /* Utilisation de la variable */
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--header-shadow); /* Utilisation de la variable */
             margin-bottom: 30px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease-in-out;
         }
         
         .card:hover {
             transform: translateY(-5px); /* Effet de soulèvement au survol */
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--card-hover-shadow); /* Utilisation de la variable */
         }
         
         .card-header {
@@ -372,18 +442,18 @@
         }
         
         .vocab-item {
-            background: var(--bg-secondary);
+            background: var(--bg-secondary); /* Utilisation de la variable */
             padding: 15px;
             border-radius: 8px;
             border-left: 4px solid var(--accent);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.2s;
+            transition: all 0.2s, background 0.5s ease-in-out;
         }
         
         .vocab-item:hover {
-            background: #e6f2ff;
+            background: var(--card-hover-background); /* Utilisation de la variable */
             transform: translateX(5px); /* Effet de glissement au survol */
         }
         
@@ -422,11 +492,11 @@
             border-radius: 8px;
             border-left: 4px solid var(--accent);
             text-align: center;
-            transition: all 0.2s;
+            transition: all 0.2s, background 0.5s ease-in-out;
         }
         
         .letter-item:hover {
-            background: #e6f2ff;
+            background: var(--card-hover-background);
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
