@@ -253,7 +253,7 @@
                 <a href="index.html" class="nav-btn active">🏠 Accueil</a>
                 <a href="alphabet.html" class="nav-btn">🔤 Alphabet Cyrillique</a>
                 <a href="vocabulaire.html" class="nav-btn">📚 Vocabulaire</a>
-                <a href="#programme" class="nav-btn">📅 Programme 21 jours</a>
+                <a href="cours-russe-21-jours.html" class="nav-btn">📅 Programme 21 jours</a>
                 <a href="#ressources" class="nav-btn">🔗 Ressources</a>
             </div>
         </div>
@@ -265,7 +265,7 @@
                 <section class="intro-section">
                     <h2>Bienvenue dans votre aventure russe !</h2>
                     <p>Découvrez la richesse de la langue russe à travers notre méthode progressive et interactive. De l'alphabet cyrillique aux conversations courantes, nous vous accompagnons à chaque étape de votre apprentissage.</p>
-                    
+
                     <div class="features-grid">
                         <div class="feature-card">
                             <div class="feature-icon">🔤</div>
@@ -273,26 +273,27 @@
                             <p>Maîtrisez les 33 lettres de l'alphabet russe avec notre guide interactif et nos exercices pratiques.</p>
                             <a href="alphabet.html" class="nav-btn" style="margin-top: 15px; display: inline-block;">Commencer</a>
                         </div>
-                        
+
                         <div class="feature-card">
                             <div class="feature-icon">📚</div>
                             <h3>Vocabulaire Essentiel</h3>
                             <p>Plus de 300 mots classés par thème avec prononciation, traduction et exercices de révision.</p>
                             <a href="vocabulaire.html" class="nav-btn" style="margin-top: 15px; display: inline-block;">Explorer</a>
                         </div>
-                        
+
                         <div class="feature-card">
                             <div class="feature-icon">📅</div>
                             <h3>Programme 21 Jours</h3>
                             <p>Un parcours structuré pour acquérir les bases du russe en trois semaines intensives.</p>
-                            <a href="#programme" class="nav-btn" style="margin-top: 15px; display: inline-block;">Découvrir</a>
+                            <a href="cours-russe-21-jours.html" class="nav-btn" style="margin-top: 15px; display: inline-block;">Découvrir</a>
                         </div>
                     </div>
                 </section>
 
                 <section id="programme" class="program-overview">
-                    <h2 style="text-align: center; color: var(--primary); margin-bottom: 30px;">Programme d'Apprentissage en 21 Jours</h2>
-                    
+                    <h2 style="text-align: center; color: var(--primary); margin-bottom: 30px;">Aperçu du Programme d'Apprentissage en 21 Jours</h2>
+                    <p style="text-align: center; margin-bottom: 20px;">Notre programme est conçu pour vous guider pas à pas. Cliquez sur le bouton "Programme 21 jours" dans la navigation ou sur "Découvrir" ci-dessus pour accéder au détail des cours.</p>
+
                     <div class="week-section">
                         <div class="week-header" onclick="toggleWeek('week1')">
                             <h3>Semaine 1 : Les Fondamentaux</h3>
@@ -403,6 +404,9 @@
                             </div>
                         </div>
                     </div>
+                     <div style="text-align: center; margin-top: 30px;">
+                        <a href="cours-russe-21-jours.html" class="nav-btn" style="background-color: var(--secondary);">Accéder au Programme Complet</a>
+                    </div>
                 </section>
 
                 <section id="ressources" style="margin-top: 50px;">
@@ -441,22 +445,39 @@
             const content = document.getElementById(weekId);
             const header = content.previousElementSibling;
             const arrow = header.querySelector('span');
+
+            // Fermer les autres sections ouvertes
+            document.querySelectorAll('.week-content.active').forEach(openContent => {
+                if (openContent.id !== weekId) {
+                    openContent.classList.remove('active');
+                    const openHeader = openContent.previousElementSibling;
+                    const openArrow = openHeader.querySelector('span');
+                    openArrow.textContent = '▼';
+                }
+            });
             
             content.classList.toggle('active');
             arrow.textContent = content.classList.contains('active') ? '▲' : '▼';
         }
 
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for anchor links (sauf ceux qui pointent vers d'autres pages)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                // Vérifier si le lien est une ancre sur la page actuelle
+                if (this.pathname === window.location.pathname) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1); // Retirer le #
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
+                // Si ce n'est pas une ancre sur la page actuelle (ex: href="autrepage.html#section"),
+                // le comportement par défaut du navigateur (aller à la page) sera utilisé.
             });
         });
     </script>
