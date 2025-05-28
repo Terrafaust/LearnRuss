@@ -57,24 +57,40 @@
         header {
             background: linear-gradient(135deg, var(--primary), var(--accent)); /* Dégradé de couleurs */
             color: white;
-            padding: 30px 0;
+            padding: 30px 0 20px; /* Ajusté le padding-bottom */
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
             display: flex; /* Utilisation de flexbox pour l'alignement */
             flex-direction: column; /* Disposition verticale par défaut */
             align-items: center; /* Centrer les éléments horizontalement */
             position: relative; /* Pour positionner les éléments internes */
-            padding-bottom: 100px; /* Espace pour les menus de semaine/jour */
-        }
-        
-        header .header-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 0 20px;
         }
 
+        /* Nouveau conteneur pour la disposition symétrique dans l'en-tête */
+        header .header-main-content {
+            display: flex;
+            justify-content: space-between; /* Distribue les éléments */
+            align-items: flex-start; /* Aligne les éléments en haut */
+            width: 100%;
+            max-width: 1100px; /* Correspond à la largeur du conteneur principal */
+            padding: 0 20px;
+            flex-wrap: wrap; /* Permet le retour à la ligne sur les petits écrans */
+        }
+
+        .header-left {
+            flex: 1; /* Prend l'espace disponible */
+            text-align: left; /* Aligne le texte à gauche */
+            padding-right: 20px; /* Espace entre les sections gauche et droite */
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Aligne les boutons à droite */
+            padding-left: 20px;
+            flex-wrap: wrap; /* Permet le retour à la ligne */
+        }
+        
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 15px;
@@ -145,21 +161,22 @@
             background: var(--red-highlight); /* Couleur rouge spécifique pour le programme actif */
         }
         
-        /* Section selector pour les semaines (maintenant dans le header) */
+        /* Section selector pour les semaines (maintenant dans le header-right) */
         .section-selector {
             display: flex;
             overflow-x: auto; /* Permet le défilement horizontal si nécessaire */
             padding: 15px 0;
-            background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top: 10px; /* Ajusté la marge */
             -webkit-overflow-scrolling: touch; /* Défilement fluide sur iOS */
             scrollbar-width: none; /* Cache la barre de défilement pour Firefox */
-            position: absolute; /* Positionnement absolu dans le header */
-            bottom: 0;
-            width: 100%;
-            justify-content: center;
+            position: static; /* Plus de positionnement absolu */
+            width: auto; /* Laisser le contenu définir la largeur */
+            background: none; /* Supprimer le fond */
+            box-shadow: none; /* Supprimer l'ombre */
+            border-top: none; /* Supprimer la bordure */
             padding-bottom: 5px;
+            justify-content: flex-end; /* Aligner les boutons à droite */
         }
         
         .section-selector::-webkit-scrollbar {
@@ -191,42 +208,41 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
-        /* Tabs pour les jours (maintenant dans le header) */
+        /* Tabs pour les jours (maintenant dans le header-right) */
         .tabs {
             display: flex;
             flex-wrap: wrap;
-            margin: 30px 0 20px;
-            border-bottom: 2px solid var(--primary); /* Ligne de séparation */
-            justify-content: center;
-            position: absolute; /* Positionnement absolu dans le header */
-            bottom: -50px; /* Positionnement sous le sélecteur de semaine */
-            width: 100%;
+            margin: 10px 0 0; /* Ajusté la marge */
+            border-bottom: none; /* Supprimer la ligne de séparation */
+            justify-content: flex-end; /* Aligner les boutons à droite */
+            position: static; /* Plus de positionnement absolu */
+            width: auto; /* Laisser le contenu définir la largeur */
             left: 0;
-            background: var(--bg-primary); /* Fond blanc pour les onglets de jour */
-            border-radius: 0 0 10px 10px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-top: 1px solid var(--border-color);
-            z-index: 90; /* Moins prioritaire que le main-navigation */
+            background: none; /* Supprimer le fond */
+            border-radius: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            box-shadow: none;
+            border-top: none;
+            z-index: 90;
         }
         
         .tab-btn {
-            padding: 12px 24px;
-            background: var(--bg-secondary); /* Fond gris clair */
+            padding: 8px 16px; /* Boutons plus petits pour s'adapter */
+            background: rgba(255, 255, 255, 0.2); /* Fond semi-transparent */
             border: none;
-            border-radius: 8px 8px 0 0;
+            border-radius: 15px; /* Coins plus arrondis */
             margin-right: 8px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 500;
+            font-size: 0.9rem;
             transition: background 0.3s;
-            color: var(--text-secondary);
+            color: white; /* Texte blanc */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
         .tab-btn:hover {
-            background: #cbd5e0; /* Effet de survol */
+            background: rgba(255, 255, 255, 0.3); /* Effet de survol */
         }
         
         .tab-btn.active {
@@ -237,11 +253,29 @@
         
         /* Conteneur principal des semaines */
         .week-content {
-            display: none;
+            display: none; /* Initialement caché */
         }
         
         .week-content.active {
             display: block;
+        }
+
+        /* Contenu du résumé de la semaine */
+        .week-summary-content {
+            display: none; /* Initialement caché */
+            margin-top: 20px; /* Espace sous la navigation principale */
+        }
+
+        .week-summary-content.active {
+            display: block;
+        }
+
+        .day-buttons-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
         }
         
         /* Un seul jour affiché à la fois */
@@ -711,85 +745,113 @@
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
         }
         
+        /* Sticky Header Styles */
+        .sticky-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--primary); /* Fond plus foncé pour le mode sticky */
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .sticky-header .header-main-content {
+            flex-direction: row; /* Assure une disposition en ligne pour le mode sticky */
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .sticky-header .header-left {
+            flex: none; /* Ne prend pas tout l'espace */
+            text-align: left;
+            padding-right: 10px;
+        }
+
+        .sticky-header .header-left h1 {
+            font-size: 1.5rem; /* Titre plus petit en mode sticky */
+            margin: 0;
+        }
+
+        .sticky-header .header-left p,
+        .sticky-header .flag-colors {
+            display: none; /* Cache la description et le drapeau en mode sticky */
+        }
+
+        .sticky-header .header-right {
+            flex-direction: row; /* Garde les boutons semaine et jour en ligne */
+            align-items: center;
+            padding-left: 10px;
+        }
+
+        .sticky-header .section-btn,
+        .sticky-header .tab-btn {
+            padding: 5px 10px; /* Boutons plus petits en mode sticky */
+            font-size: 0.8rem;
+            margin: 0 3px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .sticky-header .section-btn.active,
+        .sticky-header .tab-btn.active {
+            background: var(--secondary);
+        }
+
+        /* Main navigation sticky */
+        .main-navigation.sticky-nav {
+            position: fixed;
+            top: 0; /* Sera positionné sous l'en-tête sticky */
+            width: 100%;
+            z-index: 999;
+        }
+        
         /* Responsive design */
         @media (max-width: 768px) {
-            .nav-container {
+            header .header-main-content {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .nav-item {
-                margin: 5px;
-                width: 90%;
+            .header-left, .header-right {
+                padding: 0;
+                width: 100%;
                 text-align: center;
+                align-items: center;
             }
-            
-            .tabs {
+            .header-right {
+                margin-top: 15px; /* Espace entre le titre et les menus */
+            }
+            .section-selector, .tabs {
                 flex-direction: column;
-                position: relative; /* Moins de contraintes absolues sur mobile */
-                bottom: auto;
-                margin-top: 20px;
-                border-radius: 8px;
-                padding: 10px;
-            }
-            
-            .tab-btn {
-                margin-right: 0;
+                width: 100%;
                 margin-bottom: 5px;
-                border-radius: 8px;
-                width: 100%;
+                align-items: center;
             }
-            
-            .letter-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            }
-            
-            .vocab-list, .numbers-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .card-body {
-                padding: 15px;
-            }
-            
-            header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 1.1rem;
-            }
-            
-            .vocab-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .vocab-item .translation {
-                border-left: none;
-                padding-left: 0;
-                margin-top: 8px;
-                padding-top: 8px;
-                border-top: 1px solid var(--border-color);
-                width: 100%;
-            }
-            
-            .section-selector {
-                padding: 10px 0;
-                position: relative; /* Moins de contraintes absolues sur mobile */
-                bottom: auto;
-                margin-top: 20px;
-                border-radius: 8px;
-                padding: 10px;
-            }
-            
-            .section-btn {
-                font-size: 0.85rem;
-                padding: 8px 15px;
+            .section-btn, .tab-btn {
+                width: 90%;
+                margin: 5px 0;
             }
 
-            header {
-                padding-bottom: 20px; /* Réduire l'espace en bas de l'en-tête */
+            .sticky-header .header-main-content {
+                flex-direction: column; /* Empile verticalement pour le mode sticky sur petits écrans */
+                align-items: center;
+            }
+            .sticky-header .header-left h1 {
+                font-size: 1.2rem;
+            }
+            .sticky-header .header-right {
+                flex-direction: column; /* Empile verticalement pour le mode sticky sur petits écrans */
+                margin-top: 5px;
+            }
+            .sticky-header .section-btn,
+            .sticky-header .tab-btn {
+                width: 90%;
+                margin: 3px 0;
             }
         }
         
@@ -810,24 +872,24 @@
 </head>
 <body>
     <header>
-        <div class="container header-content">
-            <h1>Cours de Russe en 21 Jours</h1>
-            <p>Programme progressif et structuré pour maîtriser les bases du russe</p>
-            <div class="flag-colors">
-                <div class="flag-white"></div>
-                <div class="flag-blue"></div>
-                <div class="flag-red"></div>
+        <div class="container header-main-content"> <div class="header-left">
+                <h1>Cours de Russe en 21 Jours</h1>
+                <p>Programme progressif et structuré pour maîtriser les bases du russe</p>
+                <div class="flag-colors">
+                    <div class="flag-white"></div>
+                    <div class="flag-blue"></div>
+                    <div class="flag-red"></div>
+                </div>
+            </div>
+            <div class="header-right"> <div class="section-selector">
+                    <button class="section-btn" onclick="openWeek(event, 'week1')">Semaine 1</button>
+                    <button class="section-btn" onclick="openWeek(event, 'week2')">Semaine 2</button>
+                    <button class="section-btn" onclick="openWeek(event, 'week3')">Semaine 3</button>
+                </div>
+                <div class="tabs">
+                    </div>
             </div>
         </div>
-
-        <div class="section-selector">
-            <button class="section-btn" onclick="openWeek(event, 'week1')">Semaine 1</button>
-            <button class="section-btn" onclick="openWeek(event, 'week2')">Semaine 2</button>
-            <button class="section-btn" onclick="openWeek(event, 'week3')">Semaine 3</button>
-        </div>
-        
-        <div class="tabs">
-            </div>
     </header>
     
     <nav class="main-navigation">
@@ -836,9 +898,7 @@
             <a href="alphabet.html" class="nav-item">🔤 Alphabet</a>
             <a href="vocabulaire.html" class="nav-item">💬 Vocabulaire</a>
             <a href="cours.html" class="nav-item active-program">📚 Programme en 21 jours</a>
-            <a href="exercices.html" class="nav-item">✏️ Exercices</a>
-            <a href="index.html#ressources" class="nav-item">🔗 Ressources</a>
-        </div>
+            </div>
     </nav>
     
     <div class="container">
@@ -852,6 +912,64 @@
             </div>
         </div>
         
+        <div id="weekSummary1" class="week-summary-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Semaine 1: Les Fondamentaux du Russe</h2>
+                </div>
+                <div class="card-body">
+                    <div class="section">
+                        <h3 class="section-title">Objectif de la semaine 1</h3>
+                        <p>Se familiariser avec l'alphabet cyrillique, acquérir les bases de la prononciation, apprendre les salutations, les présentations et les expressions de politesse courantes, ainsi que les nombres de 1 à 20.</p>
+                    </div>
+                    <div class="section">
+                        <h3 class="section-title">Parcourir les jours de la semaine 1</h3>
+                        <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
+                        <div class="day-buttons-summary" id="dayButtonsWeek1">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="weekSummary2" class="week-summary-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Semaine 2: Grammaire de Base et Communication Quotidienne</h2>
+                </div>
+                <div class="card-body">
+                    <div class="section">
+                        <h3 class="section-title">Objectif de la semaine 2</h3>
+                        <p>Maîtriser les pronoms personnels, conjuguer les verbes des deux groupes au présent, utiliser les adjectifs de base, poser des questions simples et exprimer des notions de temps.</p>
+                    </div>
+                    <div class="section">
+                        <h3 class="section-title">Parcourir les jours de la semaine 2</h3>
+                        <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
+                        <div class="day-buttons-summary" id="dayButtonsWeek2">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="weekSummary3" class="week-summary-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Semaine 3: Situations Quotidiennes et Révision Générale</h2>
+                </div>
+                <div class="card-body">
+                    <div class="section">
+                        <h3 class="section-title">Objectif de la semaine 3</h3>
+                        <p>Apprendre à exprimer ses goûts, commander au restaurant, demander son chemin, parler de la météo et des saisons, gérer une conversation téléphonique, et consolider l'ensemble des acquis.</p>
+                    </div>
+                    <div class="section">
+                        <h3 class="section-title">Parcourir les jours de la semaine 3</h3>
+                        <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
+                        <div class="day-buttons-summary" id="dayButtonsWeek3">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="week1" class="week-content">
             <div id="jour1" class="tab-content">
                 <div class="card">
@@ -1726,12 +1844,10 @@
                                 </div>
                                 <div class="number-item">
                                     <div class="digit">19</div>
-                                    <div class="russian">девятнадцать</div>
                                     <div class="pronunciation">[dieviatnatsat]</div>
                                 </div>
                                 <div class="number-item">
                                     <div class="digit">20</div>
-                                    <div class="russian">двадцать</div>
                                     <div class="pronunciation">[dvatsat]</div>
                                 </div>
                             </div>
@@ -3601,8 +3717,8 @@
                 </div>
                 
                 <div class="day-navigator">
-                    <button class="nav-button" id="prevDayBtn17" onclick="previousDay()">← Jour précédent</button>
-                    <button class="nav-button" id="nextDayBtn17" onclick="nextDay()">Jour suivant →</button>
+                    <button class="nav-button" id="prevDayBtn16" onclick="previousDay()">← Jour précédent</button>
+                    <button class="nav-button" id="nextDayBtn16" onclick="nextDay()">Jour suivant →</button>
                 </div>
             </div>
             
@@ -4066,7 +4182,7 @@
                                 <p>La notion de "русская зима" (hiver russe) est devenue un concept culturel à part entière, symbole de résilience et d'endurance. Historiquement, il a joué un rôle stratégique, servant d'"allié" contre les invasions comme celle de Napoléon et d'Hitler, donnant naissance à l'expression "генерал Мороз" (Général Gel).</p>
                                 <p>Le printemps (<strong>весна</strong> [viesna]), symbole de renouveau après la rigueur hivernale, est célébré avec une joie particulière. La tradition païenne de "Масленица" [Maslenitsa], qui marque la fin de l'hiver, implique des rituels comme brûler l'effigie de l'hiver et manger des blinis (crêpes) symbolisant le soleil qui revient.</p>
                                 <p>L'été (<strong>лето</strong> [lieto]), bien que court dans de nombreuses régions de Russie, est intensément vécu. La tradition des "дачи" [datchi] (maisons de campagne) où les citadins passent leurs weekends et vacances d'été, cultivant souvent un potager, est profondément ancrée dans la culture russe.</p>
-                                <p>L'automne (<strong>осень</strong> [ossen']) a été immortalisé par Pouchkine dans son poème "Осенняя пора" (Saison d'automne) comme sa période créative préférée. La "золотая осень" [zolotaya ossen'] (automne doré) est célébrée pour ses couleurs spectaculaires et sa mélancolie inspirante.</p>
+                                <p>L'automne (<strong>осень</strong> [ossen']), a été immortalisé par Pouchkine dans son poème "Осенняя пора" (Saison d'automne) comme sa période créative préférée. La "золотая осень" [zolotaya ossen'] (automne doré) est célébrée pour ses couleurs spectaculaires et sa mélancolie inspirante.</p>
                             </div>
                         </div>
                     </div>
@@ -4430,13 +4546,19 @@
         }
         
         // Gérer l'ouverture d'une semaine spécifique
-        function openWeek(evt, weekName) {
-            var i, weekContents, sectionBtns;
+        function openWeek(evt, weekName, activateSpecificDay = null) {
+            var i, weekContents, sectionBtns, weekSummaryContents;
             
-            // Cacher tout le contenu de toutes les semaines
+            // Cacher tout le contenu de toutes les semaines (jours)
             weekContents = document.querySelectorAll('.week-content');
             for (i = 0; i < weekContents.length; i++) {
                 weekContents[i].classList.remove('active');
+            }
+
+            // Cacher tout le contenu des résumés de semaine
+            weekSummaryContents = document.querySelectorAll('.week-summary-content');
+            for (i = 0; i < weekSummaryContents.length; i++) {
+                weekSummaryContents[i].classList.remove('active');
             }
             
             // Désactiver tous les boutons de sélection de semaine
@@ -4446,52 +4568,69 @@
             }
             
             // Afficher la semaine sélectionnée et activer son bouton
-            document.getElementById(weekName).classList.add('active');
             evt.currentTarget.classList.add('active');
             
-            // Générer les boutons de jour pour la semaine active
+            // Afficher le résumé de la semaine correspondante
+            document.getElementById(`weekSummary${weekName.replace('week', '')}`).classList.add('active');
+
+            // Générer les boutons de jour pour le menu des jours dans l'en-tête
             generateDayTabs(weekName);
 
-            // Activer le jour actuel de l'utilisateur si dans cette semaine, sinon le premier jour de la semaine
-            const currentDayInWeek = userProgress.currentDay;
-            const config = weeksConfig[weekName];
-            let dayToActivate = config.startDay;
+            // Générer les boutons des jours pour la section de résumé de la semaine
+            generateDayButtonsForSummary(weekName);
 
-            if (currentDayInWeek >= config.startDay && currentDayInWeek <= config.endDay) {
-                dayToActivate = currentDayInWeek;
+            // Désactiver tous les boutons de jour dans le conteneur .tabs global
+            const allTabButtons = document.querySelector('.tabs').querySelectorAll('.tab-btn');
+            for (let j = 0; j < allTabButtons.length; j++) {
+                allTabButtons[j].classList.remove('active');
             }
-            
-            // Simuler un clic sur le bouton du jour à activer
-            const dayBtn = document.querySelector(`.tab-btn[data-day="${dayToActivate}"]`);
-            if (dayBtn) {
-                dayBtn.click();
-            } else {
-                // Si aucun jour spécifique n'est actif, activer le premier jour de la semaine
-                const firstDayBtn = document.querySelector(`#${weekName} .tab-btn`);
-                if (firstDayBtn) {
-                    firstDayBtn.click();
+
+            // Si un jour spécifique doit être activé (par exemple, au chargement initial ou via la navigation précédente/suivante)
+            if (activateSpecificDay !== null) {
+                // S'assurer que le conteneur principal de la semaine est actif pour contenir le contenu du jour
+                document.getElementById(weekName).classList.add('active');
+                const dayBtn = document.querySelector(`.tab-btn[data-day="${activateSpecificDay}"]`);
+                if (dayBtn) {
+                    openTab({ currentTarget: dayBtn }, `jour${activateSpecificDay}`);
                 }
             }
+            
+            // Défiler vers le haut de la page pour le nouveau contenu
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
         // Gérer l'ouverture d'un jour spécifique
         function openTab(evt, tabName) {
-            var i, tabContent, tabButtons;
+            var i, tabContent;
             
             // Obtenir la semaine active
             var activeWeekElement = document.querySelector('.week-content.active');
-            if (!activeWeekElement) return;
-            
+            if (!activeWeekElement) {
+                // Si aucune semaine n'est active, activez celle qui contient le jour
+                const dayNumber = parseInt(tabName.replace('jour', ''));
+                const weekNumber = Math.ceil(dayNumber / 7);
+                const weekId = `week${weekNumber}`;
+                document.getElementById(weekId).classList.add('active');
+                activeWeekElement = document.getElementById(weekId);
+            }
+
             // Cacher tous les contenus de jour de la semaine active
             tabContent = activeWeekElement.querySelectorAll('.tab-content');
             for (i = 0; i < tabContent.length; i++) {
                 tabContent[i].classList.remove('active');
             }
             
-            // Désactiver tous les boutons de jour de la semaine active
-            tabButtons = activeWeekElement.parentElement.querySelector('.tabs').querySelectorAll('.tab-btn');
+            // Désactiver tous les boutons de jour dans le conteneur .tabs global
+            // Correction: Utiliser document.querySelector('.tabs') pour cibler le conteneur des onglets des jours
+            const tabButtons = document.querySelector('.tabs').querySelectorAll('.tab-btn');
             for (i = 0; i < tabButtons.length; i++) {
                 tabButtons[i].classList.remove('active');
+            }
+
+            // Cacher tous les résumés de semaine
+            const weekSummaryContents = document.querySelectorAll('.week-summary-content');
+            for (let k = 0; k < weekSummaryContents.length; k++) {
+                weekSummaryContents[k].classList.remove('active');
             }
             
             // Afficher le contenu de l'onglet et activer le bouton
@@ -4527,8 +4666,7 @@
                 if (currentWeekId !== nextWeekId) {
                     const nextWeekBtn = document.querySelector(`.section-btn[onclick*="${nextWeekId}"]`);
                     if (nextWeekBtn) {
-                        nextWeekBtn.click();
-                        // Le openWeek va déjà activer le bon jour, pas besoin de openTab ici
+                        openWeek({ currentTarget: nextWeekBtn }, nextWeekId, nextDayNumber); // Passer nextDayNumber
                         return; 
                     }
                 }
@@ -4536,7 +4674,7 @@
                 // Sinon, ouvrir le jour suivant dans la même semaine
                 const nextDayBtn = document.querySelector(`.tab-btn[data-day="${nextDayNumber}"]`);
                 if (nextDayBtn) {
-                    nextDayBtn.click();
+                    openTab({ currentTarget: nextDayBtn }, `jour${nextDayNumber}`);
                 }
             } else if (currentDay === 21) {
                 // Pour le jour 21, afficher le message de félicitations
@@ -4557,8 +4695,7 @@
                 if (currentWeekId !== prevWeekId) {
                     const prevWeekBtn = document.querySelector(`.section-btn[onclick*="${prevWeekId}"]`);
                     if (prevWeekBtn) {
-                        prevWeekBtn.click();
-                        // Le openWeek va déjà activer le bon jour, pas besoin de openTab ici
+                        openWeek({ currentTarget: prevWeekBtn }, prevWeekId, prevDayNumber); // Passer prevDayNumber
                         return;
                     }
                 }
@@ -4566,7 +4703,7 @@
                 // Sinon, ouvrir le jour précédent dans la même semaine
                 const prevDayBtn = document.querySelector(`.tab-btn[data-day="${prevDayNumber}"]`);
                 if (prevDayBtn) {
-                    prevDayBtn.click();
+                    openTab({ currentTarget: prevDayBtn }, `jour${prevDayNumber}`);
                 }
             }
         }
@@ -4606,7 +4743,7 @@
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' }); // Défiler vers le bas
         }
         
-        // Générer dynamiquement les boutons des jours pour la semaine active
+        // Générer dynamiquement les boutons des jours pour la semaine active (dans l'en-tête)
         function generateDayTabs(weekName) {
             const tabsContainer = document.querySelector('.tabs');
             tabsContainer.innerHTML = ''; // Vider les onglets existants
@@ -4622,14 +4759,74 @@
             }
         }
 
-        // Bouton retour en haut
-        window.onscroll = function() {
-            var backToTop = document.getElementById('back-to-top');
-            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+        // Générer les boutons des jours pour la section de résumé de la semaine
+        function generateDayButtonsForSummary(weekName) {
+            const dayButtonsContainer = document.getElementById(`dayButtons${weekName.charAt(0).toUpperCase() + weekName.slice(1)}`);
+            if (dayButtonsContainer) {
+                dayButtonsContainer.innerHTML = ''; // Vider les boutons existants
+                const config = weeksConfig[weekName];
+                for (let i = config.startDay; i <= config.endDay; i++) {
+                    const button = document.createElement('button');
+                    button.classList.add('nav-button'); // Réutiliser le style nav-button
+                    button.textContent = `Jour ${i}`;
+                    button.onclick = (event) => {
+                        // Cacher tous les résumés de semaine
+                        const weekSummaryContents = document.querySelectorAll('.week-summary-content');
+                        for (let k = 0; k < weekSummaryContents.length; k++) {
+                            weekSummaryContents[k].classList.remove('active');
+                        }
+                        // Activer le conteneur de contenu de la semaine spécifique
+                        document.getElementById(weekName).classList.add('active');
+                        // Puis ouvrir l'onglet du jour spécifique
+                        openTab(event, `jour${i}`);
+                    };
+                    dayButtonsContainer.appendChild(button);
+                }
             }
+        }
+
+        // Sticky header logic
+        const header = document.querySelector('header');
+        const mainNav = document.querySelector('.main-navigation');
+        let headerOffsetTop = header.offsetTop; // Position initiale du haut de l'en-tête
+
+        function handleScroll() {
+            // Calculer la hauteur de la barre de navigation principale pour le padding-top
+            const mainNavHeight = mainNav.offsetHeight;
+
+            if (window.pageYOffset > headerOffsetTop) { // Lorsque l'utilisateur a défilé au-delà de l'en-tête
+                header.classList.add('sticky-header');
+                mainNav.classList.add('sticky-nav');
+                // Ajouter un padding au corps pour éviter que le contenu ne "saute" sous l'en-tête sticky
+                document.body.style.paddingTop = (header.offsetHeight + mainNavHeight) + 'px'; 
+            } else {
+                header.classList.remove('sticky-header');
+                mainNav.classList.remove('sticky-nav');
+                document.body.style.paddingTop = '0';
+            }
+        }
+
+        // Mettre à jour headerOffsetTop si la taille de la fenêtre change
+        window.addEventListener('resize', () => {
+            header.classList.remove('sticky-header'); // Enlever temporairement la classe sticky pour recalculer
+            mainNav.classList.remove('sticky-nav');
+            document.body.style.paddingTop = '0';
+            headerOffsetTop = header.offsetTop;
+            handleScroll(); // Réappliquer le sticky si nécessaire
+        });
+
+        window.addEventListener('scroll', handleScroll);
+        
+        // Bouton retour en haut
+        window.onload = function() {
+            var backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', function() {
+                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
         };
         
         document.getElementById('back-to-top').addEventListener('click', function(e) {
@@ -4641,17 +4838,22 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadProgress(); // Charger la progression de l'utilisateur
 
-            // Déterminer la semaine et le jour à afficher au démarrage
             const initialWeekId = `week${Math.ceil(userProgress.currentDay / 7)}`;
             const initialWeekBtn = document.querySelector(`.section-btn[onclick*="${initialWeekId}"]`);
             
             if (initialWeekBtn) {
-                // Simuler un clic sur le bouton de la semaine initiale pour charger les jours
-                initialWeekBtn.click();
+                // Appeler openWeek avec le jour spécifique à activer
+                openWeek({ currentTarget: initialWeekBtn }, initialWeekId, userProgress.currentDay);
             } else {
-                // Si aucune progression, activer la semaine 1 par défaut
-                document.querySelector('.section-btn[onclick*="week1"]').click();
+                // Par défaut, Semaine 1, Jour 1 si aucune progression n'est trouvée
+                const firstWeekBtn = document.querySelector('.section-btn[onclick*="week1"]');
+                if (firstWeekBtn) {
+                    openWeek({ currentTarget: firstWeekBtn }, 'week1', 1);
+                }
             }
+
+            // Appel initial pour définir l'état sticky si la page est déjà défilée au chargement
+            handleScroll();
         });
     </script>
 </body>
