@@ -44,6 +44,7 @@
             background: #f0f5ff; /* Fond légèrement bleuté */
             min-height: 100vh;
             scroll-behavior: smooth; /* Défilement doux */
+            transition: padding-top 0.5s ease-in-out; /* Smooth transition for body padding */
         }
         
         /* Conteneur principal pour centrer le contenu */
@@ -61,9 +62,11 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
             display: flex; /* Utilisation de flexbox pour l'alignement */
-            flex-direction: column; /* Disposition verticale par défaut */
+            flex-direction: column; /* Disposition verticale par default */
             align-items: center; /* Centrer les éléments horizontalement */
             position: relative; /* Pour positionner les éléments internes */
+            transition: all 0.5s ease-in-out; /* Smooth transition for header properties */
+            min-height: 150px; /* Minimum height for initial state */
         }
 
         /* Nouveau conteneur pour la disposition symétrique dans l'en-tête */
@@ -81,6 +84,7 @@
             flex: 1; /* Prend l'espace disponible */
             text-align: left; /* Aligne le texte à gauche */
             padding-right: 20px; /* Espace entre les sections gauche et droite */
+            transition: all 0.5s ease-in-out;
         }
 
         .header-right {
@@ -89,17 +93,20 @@
             align-items: flex-end; /* Aligne les boutons à droite */
             padding-left: 20px;
             flex-wrap: wrap; /* Permet le retour à la ligne */
+            transition: all 0.5s ease-in-out;
         }
         
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 15px;
             font-weight: 700;
+            transition: all 0.5s ease-in-out; /* Smooth font size transition */
         }
         
         header p {
             font-size: 1.2rem;
             opacity: 0.9;
+            transition: all 0.5s ease-in-out; /* Smooth opacity and font size transition */
         }
         
         /* Couleurs du drapeau russe */
@@ -112,6 +119,9 @@
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             animation: flag-pulse 3s infinite alternate; /* Animation de pulsation */
+            opacity: 1; /* Initial opacity */
+            max-height: 10px; /* Initial max-height */
+            transition: all 0.5s ease-in-out; /* Smooth transition for opacity and height */
         }
         
         @keyframes flag-pulse {
@@ -130,6 +140,7 @@
             position: sticky; /* Reste en haut lors du défilement */
             top: 0;
             z-index: 100; /* Assure qu'il est au-dessus des autres éléments */
+            transition: all 0.5s ease-in-out; /* Smooth transition for position and shadow */
         }
         
         .nav-container {
@@ -177,6 +188,7 @@
             border-top: none; /* Supprimer la bordure */
             padding-bottom: 5px;
             justify-content: flex-end; /* Aligner les boutons à droite */
+            transition: all 0.5s ease-in-out; /* Smooth transition */
         }
         
         .section-selector::-webkit-scrollbar {
@@ -193,7 +205,7 @@
             white-space: nowrap; /* Empêche le texte de se briser */
             font-weight: 500;
             font-size: 0.95rem;
-            transition: all 0.2s;
+            transition: all 0.2s; /* Keep quick transition for hover/active */
             color: white; /* Texte blanc */
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -225,6 +237,7 @@
             box-shadow: none;
             border-top: none;
             z-index: 90;
+            transition: all 0.5s ease-in-out; /* Smooth transition */
         }
         
         .tab-btn {
@@ -236,7 +249,7 @@
             cursor: pointer;
             font-weight: 500;
             font-size: 0.9rem;
-            transition: background 0.3s;
+            transition: background 0.3s; /* Keep quick transition for hover/active */
             color: white; /* Texte blanc */
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
@@ -745,72 +758,84 @@
             box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
         }
         
-        /* Sticky Header Styles */
+        /* Sticky Header Styles - The target state */
         .sticky-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--primary); /* Fond plus foncé pour le mode sticky */
-            padding: 10px 0;
+            background: var(--primary); /* Solid background for sticky */
+            padding: 10px 0; /* Reduced padding */
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 1000;
-            display: flex;
-            justify-content: center;
+            height: 70px; /* Fixed height for the sticky header */
+            overflow: hidden; /* Hide content that shrinks */
+            flex-direction: row; /* Layout for sticky */
+            justify-content: center; /* Center content in sticky */
             align-items: center;
-            transition: all 0.3s ease;
         }
 
         .sticky-header .header-main-content {
-            flex-direction: row; /* Assure une disposition en ligne pour le mode sticky */
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
+            width: 100%; /* Ensure it spans full width inside sticky */
         }
 
         .sticky-header .header-left {
-            flex: none; /* Ne prend pas tout l'espace */
+            flex: 1; /* Take available space */
             text-align: left;
             padding-right: 10px;
         }
 
         .sticky-header .header-left h1 {
-            font-size: 1.5rem; /* Titre plus petit en mode sticky */
+            font-size: 1.5rem; /* Smaller font size for sticky title */
             margin: 0;
         }
 
         .sticky-header .header-left p,
         .sticky-header .flag-colors {
-            display: none; /* Cache la description et le drapeau en mode sticky */
+            opacity: 0; /* Fade out description and flag */
+            max-height: 0; /* Collapse height */
+            margin: 0; /* Remove margin */
+            padding: 0; /* Remove padding */
+            visibility: hidden; /* Hide from screen readers/interaction */
         }
 
         .sticky-header .header-right {
-            flex-direction: row; /* Garde les boutons semaine et jour en ligne */
+            flex-direction: row;
             align-items: center;
             padding-left: 10px;
         }
 
+        .sticky-header .section-selector,
+        .sticky-header .tabs {
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+            flex-direction: row; /* Ensure row layout */
+            justify-content: flex-end;
+        }
+
         .sticky-header .section-btn,
         .sticky-header .tab-btn {
-            padding: 5px 10px; /* Boutons plus petits en mode sticky */
+            padding: 5px 10px;
             font-size: 0.8rem;
             margin: 0 3px;
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .sticky-header .section-btn.active,
-        .sticky-header .tab-btn.active {
-            background: var(--secondary);
-        }
-
         /* Main navigation sticky */
         .main-navigation.sticky-nav {
             position: fixed;
-            top: 0; /* Sera positionné sous l'en-tête sticky */
+            top: 70px; /* Position below the sticky header */
             width: 100%;
             z-index: 999;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        
+
         /* Responsive design */
         @media (max-width: 768px) {
             header .header-main-content {
@@ -4031,7 +4056,7 @@
                                 <div class="vocab-item">
                                     <div>
                                         <div class="term">ветер</div>
-                                        <div class="pronunciation">[vièter]</div>
+                                        <div class="pronunciation">[viètèr]</div>
                                     </div>
                                     <div class="translation">vent</div>
                                 </div>
@@ -4788,34 +4813,63 @@
         // Sticky header logic
         const header = document.querySelector('header');
         const mainNav = document.querySelector('.main-navigation');
-        let headerOffsetTop = header.offsetTop; // Position initiale du haut de l'en-tête
 
-        function handleScroll() {
-            // Calculer la hauteur de la barre de navigation principale pour le padding-top
-            const mainNavHeight = mainNav.offsetHeight;
+        // Get the initial top position of the header
+        let headerInitialTop = header.offsetTop;
 
-            if (window.pageYOffset > headerOffsetTop) { // Lorsque l'utilisateur a défilé au-delà de l'en-tête
+        // Define the target height for the sticky header
+        const stickyHeaderTargetHeight = 70; // This is the height when it's fully sticky
+
+        // Function to update the sticky state
+        function updateStickyState() {
+            const scrollY = window.pageYOffset;
+            const mainNavHeight = mainNav.offsetHeight; // Get current height of main nav
+
+            // If the scroll position is beyond where the header initially starts
+            if (scrollY > headerInitialTop) {
+                // Add sticky classes
                 header.classList.add('sticky-header');
                 mainNav.classList.add('sticky-nav');
-                // Ajouter un padding au corps pour éviter que le contenu ne "saute" sous l'en-tête sticky
-                document.body.style.paddingTop = (header.offsetHeight + mainNavHeight) + 'px'; 
+
+                // Calculate the total height of the sticky elements
+                const totalStickyHeight = stickyHeaderTargetHeight + mainNavHeight;
+                document.body.style.paddingTop = `${totalStickyHeight}px`;
+                document.body.classList.add('sticky-active'); // For body padding transition
             } else {
+                // Remove sticky classes
                 header.classList.remove('sticky-header');
                 mainNav.classList.remove('sticky-nav');
                 document.body.style.paddingTop = '0';
+                document.body.classList.remove('sticky-active');
             }
         }
 
-        // Mettre à jour headerOffsetTop si la taille de la fenêtre change
+        // Event listener for scroll
+        window.addEventListener('scroll', updateStickyState);
+
+        // Recalculate initial positions and heights on resize
         window.addEventListener('resize', () => {
-            header.classList.remove('sticky-header'); // Enlever temporairement la classe sticky pour recalculer
+            // Temporarily remove sticky classes to get accurate non-sticky dimensions
+            header.classList.remove('sticky-header');
             mainNav.classList.remove('sticky-nav');
             document.body.style.paddingTop = '0';
-            headerOffsetTop = header.offsetTop;
-            handleScroll(); // Réappliquer le sticky si nécessaire
+            document.body.classList.remove('sticky-active');
+
+            // Recalculate initial top
+            headerInitialTop = header.offsetTop;
+
+            // Re-evaluate sticky state after resize
+            updateStickyState();
         });
 
-        window.addEventListener('scroll', handleScroll);
+        // Initial call on DOMContentLoaded to set up initial state
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure styles are applied before getting offsetTop and offsetHeight
+            setTimeout(() => {
+                headerInitialTop = header.offsetTop;
+                updateStickyState(); // Set initial sticky state if already scrolled
+            }, 100); // Small delay to ensure layout is stable
+        });
         
         // Bouton retour en haut
         window.onload = function() {
@@ -4853,7 +4907,7 @@
             }
 
             // Appel initial pour définir l'état sticky si la page est déjà défilée au chargement
-            handleScroll();
+            updateStickyState();
         });
     </script>
 </body>
