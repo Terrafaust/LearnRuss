@@ -127,7 +127,7 @@
             align-items: center; /* Centrer les éléments horizontalement */
             position: relative; /* Pour positionner les éléments internes */
             transition: all 0.5s ease-in-out; /* Smooth transition for header properties */
-            min-height: 150px; /* Minimum height for initial state */
+            min-height: 250px; /* Minimum height for initial state */
         }
 
         /* Nouveau conteneur pour la disposition symétrique dans l'en-tête */
@@ -195,53 +195,6 @@
         .flag-blue { background: #0039A6; flex: 1; }
         .flag-red { background: #D52B1E; flex: 1; }
         
-        /* Navigation principale du site (Accueil, Alphabet, etc.) */
-        .header-nav-links {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            max-width: 1100px;
-            padding: 10px 0;
-            flex-wrap: wrap;
-            background: var(--main-nav-bg); /* Couleur de fond sombre */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            border-radius: 5px; /* Rounded corners for the nav bar */
-            margin-top: 20px; /* Space below header content */
-            opacity: 0; /* Initially hidden */
-            max-height: 0; /* Collapse height */
-            overflow: hidden; /* Hide content during collapse */
-            transition: all 0.5s ease-in-out; /* Smooth transition */
-            visibility: hidden; /* Hide from screen readers when collapsed */
-            position: absolute; /* Position for transition */
-            top: 0; /* Will be adjusted by JS */
-            left: 50%;
-            transform: translateX(-50%) scale(0.8); /* Start smaller */
-            transform-origin: center center;
-            pointer-events: none; /* Prevent interaction when hidden */
-        }
-
-        .header-nav-links .nav-item {
-            color: white;
-            text-decoration: none;
-            padding: 10px 15px;
-            margin: 0 5px;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: background 0.3s; /* Transition douce au survol */
-        }
-        
-        .header-nav-links .nav-item:hover {
-            background: var(--main-nav-hover-bg); /* Effet de survol */
-        }
-        
-        .header-nav-links .nav-item.active {
-            background: var(--main-nav-active-bg); /* Couleur active par défaut */
-        }
-
-        .header-nav-links .nav-item.active-program {
-            background: var(--red-highlight); /* Couleur rouge spécifique pour le programme actif */
-        }
-
         /* Section selector pour les semaines (maintenant dans le header-right) */
         .section-selector {
             display: flex;
@@ -545,11 +498,11 @@
             padding: 12px;
             border-radius: 8px;
             border-left: 4px solid var(--accent);
-            transition: all 0.2s;
+            transition: all 0.2s, background 0.5s ease-in-out;
         }
         
         .number-item:hover {
-            background: #e6f2ff;
+            background: var(--card-hover-background);
             transform: translateY(-2px);
         }
         
@@ -575,11 +528,12 @@
         
         /* Boîtes de notes */
         .note-box {
-            background: #e6fffa;
+            background: var(--note-box-background);
             border-left: 4px solid var(--info);
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
+            transition: background 0.5s ease-in-out;
         }
         
         .note-title {
@@ -590,11 +544,12 @@
         
         /* Boîtes d'exercices */
         .exercise {
-            background: #f0f4f8;
+            background: var(--exercise-background);
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
             border-left: 4px solid var(--warning);
+            transition: background 0.5s ease-in-out;
         }
         
         .exercise-title {
@@ -605,12 +560,13 @@
         
         /* Boîtes de dialogue */
         .dialogue-box {
-            background: #f8f9fa;
+            background: var(--dialogue-box-background);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 15px;
             margin-top: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background 0.5s ease-in-out, border-color 0.5s ease-in-out;
         }
         
         .dialogue-box .speaker {
@@ -651,10 +607,11 @@
         
         /* Liste de récapitulatif */
         .recap-list {
-            background: #f0f4ff;
+            background: var(--recap-list-background);
             padding: 15px;
             border-radius: 8px;
             border-left: 4px solid var(--success);
+            transition: background 0.5s ease-in-out;
         }
         
         .recap-list ul {
@@ -672,11 +629,12 @@
         
         /* Indicateur de progression */
         .progress-container {
-            background: white;
+            background: var(--bg-primary);
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: var(--header-shadow);
+            transition: background 0.5s ease-in-out;
         }
         
         .progress-header {
@@ -689,14 +647,15 @@
         .progress-bar {
             width: 100%;
             height: 20px;
-            background: var(--border-color);
+            background: var(--progress-bar-background);
             border-radius: 10px;
             overflow: hidden;
+            transition: background 0.5s ease-in-out;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--success), var(--accent));
+            background: var(--progress-fill-gradient);
             transition: width 0.5s ease;
             display: flex;
             align-items: center;
@@ -742,6 +701,13 @@
         .nav-button.validate:hover {
             background: #2f855a;
         }
+
+        /* Style for active day button in summary */
+        .day-buttons-summary .nav-button.active-day {
+            background: var(--primary); /* Use primary color for active day in summary */
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         
         /* Bouton retour en haut */
         .back-to-top {
@@ -770,7 +736,7 @@
 
         /* Message de félicitations */
         .congratulations-message {
-            background: #d4f1d4;
+            background: var(--congrats-background);
             border-left: 8px solid var(--success);
             padding: 30px;
             border-radius: 12px;
@@ -778,6 +744,7 @@
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             animation: bounceIn 0.8s ease-out;
+            transition: background 0.5s ease-in-out;
         }
 
         .congratulations-message h3 {
@@ -825,85 +792,189 @@
             padding: 20px;
             margin-top: 40px;
             border-radius: 12px 12px 0 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--footer-shadow);
+            transition: background 0.5s ease-in-out;
         }
         
         /* Sticky Header Styles - The target state */
-        .sticky-header {
+        header.sticky-header {
+            height: 120px; /* Fixed height for the sticky header */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background: var(--sticky-header-bg);
+            box-shadow: var(--sticky-header-shadow);
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: var(--primary); /* Solid background for sticky */
-            padding: 10px 0; /* Reduced padding */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             z-index: 1000;
-            height: 70px; /* Fixed height for the sticky header */
-            overflow: hidden; /* Hide content that shrinks */
-            flex-direction: row; /* Layout for sticky */
-            justify-content: center; /* Center content in sticky */
+            overflow: hidden; /* Hide content that goes out of bounds */
+            flex-direction: row; /* Align content horizontally */
+            justify-content: center;
             align-items: center;
         }
 
-        .sticky-header .header-main-content {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            width: 100%; /* Ensure it spans full width inside sticky */
-        }
-
-        .sticky-header .header-left {
-            flex: 1; /* Take available space */
-            text-align: left;
-            padding-right: 10px;
-        }
-
-        .sticky-header .header-left h1 {
-            font-size: 1.5rem; /* Smaller font size for sticky title */
-            margin: 0;
-        }
-
-        .sticky-header .header-left p,
-        .sticky-header .flag-colors {
-            opacity: 0; /* Fade out description and flag */
-            max-height: 0; /* Collapse height */
-            margin: 0; /* Remove margin */
-            padding: 0; /* Remove padding */
-            visibility: hidden; /* Hide from screen readers/interaction */
-        }
-
-        .sticky-header .header-right {
-            flex-direction: row;
-            align-items: center;
-            padding-left: 10px;
-        }
-
-        .sticky-header .section-selector,
-        .sticky-header .tabs {
-            background: none;
-            box-shadow: none;
+        header.sticky-header .header-main-content {
+            /* Hide the original large content */
+            opacity: 0;
+            max-height: 0;
             padding: 0;
             margin: 0;
-            flex-direction: row; /* Ensure row layout */
-            justify-content: flex-end;
+            visibility: hidden;
+            pointer-events: none;
         }
 
-        .sticky-header .section-btn,
-        .sticky-header .tab-btn {
+        /* Sticky Navigation Container - this is what appears */
+        .sticky-nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            opacity: 0;
+            max-height: 0;
+            transform: scale(0.8);
+            transition: all 0.5s ease-in-out;
+            visibility: hidden;
+            pointer-events: none;
+            position: absolute; /* Position for transition */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8); /* Center and scale */
+            transform-origin: center center;
+        }
+
+        header.sticky-header .sticky-nav-container {
+            opacity: 1;
+            max-height: 100px; /* Or whatever height it needs */
+            transform: translate(-50%, -50%) scale(1);
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* Styles for main site nav links within sticky header */
+        .sticky-main-nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 5px; /* Space between main nav and week/day nav */
+        }
+
+        .sticky-main-nav-links .nav-item {
+            color: white;
+            text-decoration: none;
             padding: 5px 10px;
-            font-size: 0.8rem;
             margin: 0 3px;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        .sticky-main-nav-links .nav-item:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* Main navigation sticky */
-        .main-navigation.sticky-nav {
-            position: fixed;
-            top: 70px; /* Position below the sticky header */
+        .sticky-main-nav-links .nav-item.active {
+            background: var(--accent);
+        }
+
+        .sticky-main-nav-links .nav-item.active-program {
+            background: var(--red-highlight);
+        }
+
+        /* Styles for week/day nav within sticky header */
+        .sticky-week-day-nav {
+            display: flex;
             width: 100%;
-            z-index: 999;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .sticky-section-selector, .sticky-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+            margin: 0 5px; /* Space between week and day sections */
+        }
+
+        .sticky-section-selector .section-btn, .sticky-tabs .tab-btn {
+            padding: 3px 8px;
+            font-size: 0.75rem;
+            margin: 0 2px;
+            background: var(--sticky-btn-bg);
+            color: white;
+            border-radius: 15px;
+            transition: all 0.2s;
+        }
+
+        .sticky-section-selector .section-btn:hover, .sticky-tabs .tab-btn:hover {
+            background: var(--sticky-btn-hover-bg);
+        }
+
+        .sticky-section-selector .section-btn.active-week {
+            background: var(--secondary);
+        }
+
+        .sticky-tabs .tab-btn.active-day {
+            background: var(--primary);
+        }
+
+        /* Original main navigation (now .site-main-navigation) */
+        .site-main-navigation {
+            background: var(--main-nav-bg);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 999; /* Below sticky header */
+            transition: all 0.5s ease-in-out;
+            padding: 10px 0; /* Add padding here */
+        }
+
+        .site-main-navigation .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0; /* Remove padding from here */
+            flex-wrap: wrap;
+        }
+
+        /* Styles for the new nav-btn in main navigation */
+        .site-main-navigation .nav-btn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s;
+            background: transparent; /* Default background */
+        }
+
+        .site-main-navigation .nav-btn:hover {
+            background: var(--main-nav-hover-bg);
+        }
+
+        .site-main-navigation .nav-btn.active-program {
+            background: var(--red-highlight);
+        }
+
+        /* Body padding adjustment for sticky header */
+        body.sticky-active {
+            padding-top: 120px; /* Height of sticky header */
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001; /* Ensure it's above other elements */
+            transition: color 0.5s ease-in-out;
         }
 
         /* Responsive design */
@@ -932,21 +1003,35 @@
                 margin: 5px 0;
             }
 
-            .sticky-header .header-main-content {
-                flex-direction: column; /* Empile verticalement pour le mode sticky sur petits écrans */
-                align-items: center;
+            header.sticky-header {
+                height: auto; /* Allow height to adjust for stacked content */
+                padding: 10px 0;
+                flex-direction: column;
             }
-            .sticky-header .header-left h1 {
-                font-size: 1.2rem;
+            header.sticky-header .sticky-nav-container {
+                position: static; /* Allow normal flow */
+                transform: none;
+                max-height: none; /* Allow content to expand */
             }
-            .sticky-header .header-right {
-                flex-direction: column; /* Empile verticalement pour le mode sticky sur petits écrans */
-                margin-top: 5px;
+            .sticky-main-nav-links, .sticky-week-day-nav {
+                flex-direction: column;
+                width: 100%;
             }
-            .sticky-header .section-btn,
-            .sticky-header .tab-btn {
+            .sticky-main-nav-links .nav-item,
+            .sticky-section-selector .section-btn,
+            .sticky-tabs .tab-btn {
                 width: 90%;
-                margin: 3px 0;
+                margin: 5px auto;
+                text-align: center;
+            }
+            .sticky-week-day-nav {
+                margin-top: 10px;
+            }
+            .sticky-section-selector, .sticky-tabs {
+                margin: 0;
+            }
+            body.sticky-active {
+                padding-top: 180px; /* Adjust based on new sticky header height */
             }
         }
         
@@ -966,8 +1051,9 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header-main-content"> <div class="header-left">
+    <header id="main-header">
+        <div class="container header-main-content">
+            <div class="header-left">
                 <h1>Cours de Russe en 21 Jours</h1>
                 <p>Programme progressif et structuré pour maîtriser les bases du russe</p>
                 <div class="flag-colors">
@@ -976,24 +1062,40 @@
                     <div class="flag-red"></div>
                 </div>
             </div>
-            <div class="header-right"> <div class="section-selector">
+            <div class="header-right">
+                <div class="section-selector">
                     <button class="section-btn" onclick="openWeek(event, 'week1')">Semaine 1</button>
                     <button class="section-btn" onclick="openWeek(event, 'week2')">Semaine 2</button>
                     <button class="section-btn" onclick="openWeek(event, 'week3')">Semaine 3</button>
                 </div>
                 <div class="tabs">
-                    </div>
+                </div>
             </div>
         </div>
+        <div class="sticky-nav-container">
+            <div class="sticky-main-nav-links">
+                <a href="index.html" class="nav-item">🏠 Accueil</a>
+                <a href="alphabet.html" class="nav-item">🔤 Alphabet Cyrillique</a>
+                <a href="vocabulaire.html" class="nav-item">📚 Vocabulaire</a>
+                <a href="cours-russe-en-21-jours.html" class="nav-item active-program">📅 Programme 21 jours</a>
+            </div>
+            <div class="sticky-week-day-nav">
+                <div class="sticky-section-selector"></div>
+                <div class="sticky-tabs"></div>
+            </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
     </header>
     
-    <nav class="main-navigation">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item">🏠 Accueil</a>
-            <a href="alphabet.html" class="nav-item">🔤 Alphabet</a>
-            <a href="vocabulaire.html" class="nav-item">💬 Vocabulaire</a>
-            <a href="cours.html" class="nav-item active-program">📚 Programme en 21 jours</a>
+    <nav class="site-main-navigation">
+        <div class="container">
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">🏠 Accueil</a>
+                <a href="alphabet.html" class="nav-btn">🔤 Alphabet Cyrillique</a>
+                <a href="vocabulaire.html" class="nav-btn">📚 Vocabulaire</a>
+                <a href="cours-russe-en-21-jours.html" class="nav-btn active-program">📅 Programme 21 jours</a>
             </div>
+        </div>
     </nav>
     
     <div class="container">
@@ -1021,7 +1123,7 @@
                         <h3 class="section-title">Parcourir les jours de la semaine 1</h3>
                         <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
                         <div class="day-buttons-summary" id="dayButtonsWeek1">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1040,7 +1142,7 @@
                         <h3 class="section-title">Parcourir les jours de la semaine 2</h3>
                         <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
                         <div class="day-buttons-summary" id="dayButtonsWeek2">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1059,7 +1161,7 @@
                         <h3 class="section-title">Parcourir les jours de la semaine 3</h3>
                         <p>Cliquez sur les boutons ci-dessous pour explorer chaque journée de cours en détail :</p>
                         <div class="day-buttons-summary" id="dayButtonsWeek3">
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1257,7 +1359,6 @@
                                 </div>
                                 <div class="letter-item">
                                     <div class="cyrillic"><span>Р</span><span>р</span></div>
-                                    <div class="pronunciation">[r]</div>
                                     <div class="example">roulé comme en espagnol</div>
                                 </div>
                                 <div class="letter-item">
@@ -1267,7 +1368,6 @@
                                 </div>
                                 <div class="letter-item">
                                     <div class="cyrillic"><span>Т</span><span>т</span></div>
-                                    <div class="pronunciation">[t]</div>
                                     <div class="example">comme dans "ton"</div>
                                 </div>
                             </div>
@@ -1386,7 +1486,6 @@
                                 </div>
                                 <div class="letter-item">
                                     <div class="cyrillic"><span>Ш</span><span>ш</span></div>
-                                    <div class="pronunciation">[ch]</div>
                                     <div class="example">comme dans "chat"</div>
                                 </div>
                                 <div class="letter-item">
@@ -1939,10 +2038,12 @@
                                 </div>
                                 <div class="number-item">
                                     <div class="digit">19</div>
+                                    <div class="russian">девятнадцать</div>
                                     <div class="pronunciation">[dieviatnatsat]</div>
                                 </div>
                                 <div class="number-item">
                                     <div class="digit">20</div>
+                                    <div class="russian">двадцать</div>
                                     <div class="pronunciation">[dvatsat]</div>
                                 </div>
                             </div>
@@ -2498,7 +2599,7 @@
                                 </div>
                                 <div class="vocab-item">
                                     <div>
-                                        <div class="term">on/она говорит</div>
+                                        <div class="term">он/она говорит</div>
                                         <div class="pronunciation">[on/ana gavarit]</div>
                                     </div>
                                     <div class="translation">il/elle parle</div>
@@ -2831,7 +2932,7 @@
                                 <div class="vocab-item">
                                     <div>
                                         <div class="term">маленький/маленькая/маленькое</div>
-                                        <div class="pronunciation">[malièn'kiy/malièn'kaya/malièn'kaye]</div>
+                                    <div class="pronunciation">[malièn'kiy/malièn'kaya/malièn'kaye]</div>
                                     </div>
                                     <div class="translation">petit/petite</div>
                                 </div>
@@ -3777,7 +3878,7 @@
                                     <span class="speaker">Покупатель:</span>
                                     <span class="russian">Я ищу рубашку. У вас есть синие рубашки?</span>
                                     <span class="translation">Je cherche une chemise. Avez-vous des chemises bleues ?</span>
-                                </div>
+                                    </div>
                                 <div class="dialogue-line">
                                     <span class="speaker">Продавец:</span>
                                     <span class="russian">Да, конечно. Какой размер вам нужен?</span>
@@ -3812,8 +3913,8 @@
                 </div>
                 
                 <div class="day-navigator">
-                    <button class="nav-button" id="prevDayBtn16" onclick="previousDay()">← Jour précédent</button>
-                    <button class="nav-button" id="nextDayBtn16" onclick="nextDay()">Jour suivant →</button>
+                    <button class="nav-button" id="prevDayBtn17" onclick="previousDay()">← Jour précédent</button>
+                    <button class="nav-button" id="nextDayBtn17" onclick="nextDay()">Jour suivant →</button>
                 </div>
             </div>
             
@@ -4599,6 +4700,12 @@
             lastVisit: new Date().toISOString() // Date de la dernière visite
         };
         
+        // Global variable to keep track of the currently active week ID (e.g., 'week1', 'week2')
+        let activeWeekId = '';
+
+        // Initial top position of the header (will be set on DOMContentLoaded)
+        let headerInitialTop;
+
         // Charger la progression depuis localStorage
         function loadProgress() {
             const saved = localStorage.getItem('russianCourseProgress');
@@ -4640,10 +4747,125 @@
             }
         }
         
+        // Update the sticky state
+        function updateStickyState() {
+            const scrollY = window.pageYOffset;
+            const isSummaryPage = document.querySelector('.week-summary-content.active') !== null;
+            const header = document.getElementById('main-header');
+            const stickyNavContainer = document.querySelector('.sticky-nav-container');
+
+            // If it's a summary page, prevent sticky behavior
+            if (isSummaryPage) {
+                header.classList.remove('sticky-header');
+                document.body.style.paddingTop = '0';
+                document.body.classList.remove('sticky-active');
+                // Ensure sticky nav container is hidden
+                if (stickyNavContainer) {
+                    stickyNavContainer.style.opacity = '0';
+                    stickyNavContainer.style.maxHeight = '0';
+                    stickyNavContainer.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    stickyNavContainer.style.visibility = 'hidden';
+                    stickyNavContainer.style.pointerEvents = 'none';
+                }
+                return;
+            }
+
+            // Calculate the height of the full site navigation
+            const siteMainNavHeight = document.querySelector('.site-main-navigation').offsetHeight;
+
+            if (scrollY > headerInitialTop) {
+                header.classList.add('sticky-header');
+                document.body.classList.add('sticky-active');
+
+                // Show and scale up the sticky navigation container
+                if (stickyNavContainer) {
+                    stickyNavContainer.style.opacity = '1';
+                    stickyNavContainer.style.maxHeight = '100px'; // Or appropriate height
+                    stickyNavContainer.style.transform = 'translate(-50%, -50%) scale(1)';
+                    stickyNavContainer.style.visibility = 'visible';
+                    stickyNavContainer.style.pointerEvents = 'auto';
+                }
+
+                // Adjust body padding based on sticky header height
+                const currentStickyHeaderHeight = header.offsetHeight; // Get the actual height after transition
+                document.body.style.paddingTop = `${currentStickyHeaderHeight + siteMainNavHeight}px`;
+
+            } else {
+                header.classList.remove('sticky-header');
+                document.body.classList.remove('sticky-active');
+
+                // Hide and scale down the sticky navigation container
+                if (stickyNavContainer) {
+                    stickyNavContainer.style.opacity = '0';
+                    stickyNavContainer.style.maxHeight = '0';
+                    stickyNavContainer.style.transform = 'translate(-50%, -50%) scale(0.8)';
+                    stickyNavContainer.style.visibility = 'hidden';
+                    stickyNavContainer.style.pointerEvents = 'none';
+                }
+                document.body.style.paddingTop = '0';
+            }
+        }
+
+        // Function to update active navigation button colors
+        function updateActiveNavigationColors() {
+            // Update main site navigation active state (always 'Programme 21 jours' for this page)
+            const mainNavItems = document.querySelectorAll('.site-main-navigation .nav-btn'); // Changed to .nav-btn
+            mainNavItems.forEach(item => {
+                item.classList.remove('active-program');
+                // Check if the href matches the program page
+                if (item.href.includes('cours-russe-en-21-jours.html') || item.href.includes('cours.html')) { // Use the full filename
+                    item.classList.add('active-program');
+                }
+            });
+
+            // Update sticky main navigation active state
+            const stickyMainNavItems = document.querySelectorAll('.sticky-main-nav-links .nav-item');
+            stickyMainNavItems.forEach(item => {
+                item.classList.remove('active-program');
+                if (item.href.includes('cours-russe-en-21-jours.html') || item.href.includes('cours.html')) { // Use the full filename
+                    item.classList.add('active-program');
+                }
+            });
+
+            // Update week buttons (both regular and sticky)
+            const allWeekBtns = document.querySelectorAll('.section-selector .section-btn, .sticky-section-selector .section-btn');
+            allWeekBtns.forEach(btn => btn.classList.remove('active-week'));
+            // Find the current week button based on activeWeekId
+            const currentWeekBtn = document.querySelector(`.section-selector .section-btn[onclick*="${activeWeekId}"]`);
+            if (currentWeekBtn) {
+                currentWeekBtn.classList.add('active-week');
+            }
+            const currentStickyWeekBtn = document.querySelector(`.sticky-section-selector .section-btn[onclick*="${activeWeekId}"]`);
+            if (currentStickyWeekBtn) {
+                currentStickyWeekBtn.classList.add('active-week');
+            }
+
+            // Update day buttons (both regular and sticky)
+            const allDayBtns = document.querySelectorAll('.tabs .tab-btn, .sticky-tabs .tab-btn, .day-buttons-summary .nav-button'); // Added .day-buttons-summary .nav-button
+            allDayBtns.forEach(btn => btn.classList.remove('active-day'));
+            // Find the current day button based on userProgress.currentDay
+            const currentDayBtn = document.querySelector(`.tabs .tab-btn[data-day="${userProgress.currentDay}"]`);
+            if (currentDayBtn) {
+                currentDayBtn.classList.add('active-day');
+            }
+            const currentStickyDayBtn = document.querySelector(`.sticky-tabs .tab-btn[data-day="${userProgress.currentDay}"]`);
+            if (currentStickyDayBtn) {
+                currentStickyDayBtn.classList.add('active-day');
+            }
+            // Also highlight the day button in the summary if it's active
+            const currentSummaryDayBtn = document.querySelector(`.day-buttons-summary .nav-button[data-day="${userProgress.currentDay}"]`);
+            if (currentSummaryDayBtn) {
+                currentSummaryDayBtn.classList.add('active-day');
+            }
+        }
+
         // Gérer l'ouverture d'une semaine spécifique
         function openWeek(evt, weekName, activateSpecificDay = null) {
             var i, weekContents, sectionBtns, weekSummaryContents;
             
+            // Set the active week ID
+            activeWeekId = weekName;
+
             // Cacher tout le contenu de toutes les semaines (jours)
             weekContents = document.querySelectorAll('.week-content');
             for (i = 0; i < weekContents.length; i++) {
@@ -4659,38 +4881,51 @@
             // Désactiver tous les boutons de sélection de semaine
             sectionBtns = document.getElementsByClassName('section-btn');
             for (i = 0; i < sectionBtns.length; i++) {
-                sectionBtns[i].classList.remove('active');
+                sectionBtns[i].classList.remove('active-week');
             }
             
-            // Afficher la semaine sélectionnée et activer son bouton
-            evt.currentTarget.classList.add('active');
+            // Activate the current week button if event exists, otherwise rely on updateActiveNavigationColors
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active-week');
+            }
             
             // Afficher le résumé de la semaine correspondante
             document.getElementById(`weekSummary${weekName.replace('week', '')}`).classList.add('active');
 
-            // Générer les boutons de jour pour le menu des jours dans l'en-tête
+            // Generate day tabs for both header and sticky header
             generateDayTabs(weekName);
+            generateStickyDayTabs(weekName);
 
-            // Générer les boutons des jours pour la section de résumé de la semaine
+            // Generate day buttons for the summary section
             generateDayButtonsForSummary(weekName);
 
-            // Désactiver tous les boutons de jour dans le conteneur .tabs global
-            const allTabButtons = document.querySelector('.tabs').querySelectorAll('.tab-btn');
-            for (let j = 0; j < allTabButtons.length; j++) {
-                allTabButtons[j].classList.remove('active');
-            }
-
-            // Si un jour spécifique doit être activé (par exemple, au chargement initial ou via la navigation précédente/suivante)
+            // If a specific day should be activated (e.g., on initial load or via navigation)
             if (activateSpecificDay !== null) {
-                // S'assurer que le conteneur principal de la semaine est actif pour contenir le contenu du jour
-                document.getElementById(weekName).classList.add('active');
+                userProgress.currentDay = activateSpecificDay; // Ensure currentDay is set
+                document.getElementById(weekName).classList.add('active'); // Activate the week content
                 const dayBtn = document.querySelector(`.tab-btn[data-day="${activateSpecificDay}"]`);
                 if (dayBtn) {
-                    openTab({ currentTarget: dayBtn }, `jour${activateSpecificDay}`);
+                    // Simulate a click on the day button to trigger openTab
+                    // No need to pass event object, openTab will handle it
+                    openTab(null, `jour${activateSpecificDay}`);
                 }
+            } else {
+                // If no specific day is activated, ensure no day is highlighted
+                const allTabButtons = document.querySelectorAll('.tabs .tab-btn');
+                allTabButtons.forEach(btn => btn.classList.remove('active-day'));
+                const allStickyTabButtons = document.querySelectorAll('.sticky-tabs .tab-btn');
+                allStickyTabButtons.forEach(btn => btn.classList.remove('active-day'));
+                const allSummaryDayButtons = document.querySelectorAll('.day-buttons-summary .nav-button');
+                allSummaryDayButtons.forEach(btn => btn.classList.remove('active-day'));
             }
             
-            // Défiler vers le haut de la page pour le nouveau contenu
+            // Update button colors after week change
+            updateActiveNavigationColors();
+
+            // Re-evaluate sticky state (important for summary pages)
+            updateStickyState();
+
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
@@ -4698,52 +4933,50 @@
         function openTab(evt, tabName) {
             var i, tabContent;
             
-            // Obtenir la semaine active
+            // Get the active week element
             var activeWeekElement = document.querySelector('.week-content.active');
             if (!activeWeekElement) {
-                // Si aucune semaine n'est active, activez celle qui contient le jour
+                // If no week is active, activate the one containing the day
                 const dayNumber = parseInt(tabName.replace('jour', ''));
                 const weekNumber = Math.ceil(dayNumber / 7);
-                const weekId = `week${weekNumber}`;
-                document.getElementById(weekId).classList.add('active');
-                activeWeekElement = document.getElementById(weekId);
+                activeWeekId = `week${weekNumber}`; // Set active week ID
+                document.getElementById(activeWeekId).classList.add('active');
+                activeWeekElement = document.getElementById(activeWeekId);
             }
 
-            // Cacher tous les contenus de jour de la semaine active
+            // Hide all day contents of the active week
             tabContent = activeWeekElement.querySelectorAll('.tab-content');
             for (i = 0; i < tabContent.length; i++) {
                 tabContent[i].classList.remove('active');
             }
             
-            // Désactiver tous les boutons de jour dans le conteneur .tabs global
-            // Correction: Utiliser document.querySelector('.tabs') pour cibler le conteneur des onglets des jours
-            const tabButtons = document.querySelector('.tabs').querySelectorAll('.tab-btn');
-            for (i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove('active');
-            }
-
-            // Cacher tous les résumés de semaine
+            // Hide all week summaries
             const weekSummaryContents = document.querySelectorAll('.week-summary-content');
             for (let k = 0; k < weekSummaryContents.length; k++) {
                 weekSummaryContents[k].classList.remove('active');
             }
             
-            // Afficher le contenu de l'onglet et activer le bouton
+            // Display the tab content and activate the button
             document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
             
-            // Mettre à jour le jour actuel dans la progression de l'utilisateur
+            // Update user progress
             const dayNumber = parseInt(tabName.replace('jour', ''));
             userProgress.currentDay = dayNumber;
             saveProgress();
             
-            // Mettre à jour l'état des boutons de navigation (précédent/suivant)
+            // Update button colors
+            updateActiveNavigationColors();
+
+            // Update day navigator buttons (prev/next)
             updateDayNavigatorButtons(dayNumber);
 
-            // Cacher le message de félicitations si visible
+            // Hide congratulations message if visible
             document.getElementById('congratulations-message').style.display = 'none';
             
-            // Défiler vers le haut de la page pour le nouveau contenu
+            // Re-evaluate sticky state
+            updateStickyState();
+
+            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
         
@@ -4854,6 +5087,22 @@
             }
         }
 
+        // Générer dynamiquement les boutons des jours pour le menu sticky
+        function generateStickyDayTabs(weekName) {
+            const stickyTabsContainer = document.querySelector('.sticky-tabs');
+            stickyTabsContainer.innerHTML = ''; // Clear existing tabs
+            
+            const config = weeksConfig[weekName];
+            for (let i = config.startDay; i <= config.endDay; i++) {
+                const button = document.createElement('button');
+                button.classList.add('tab-btn');
+                button.setAttribute('onclick', `openTab(event, 'jour${i}')`);
+                button.setAttribute('data-day', i);
+                button.textContent = `J${i}`; // Shorter text for sticky
+                stickyTabsContainer.appendChild(button);
+            }
+        }
+
         // Générer les boutons des jours pour la section de résumé de la semaine
         function generateDayButtonsForSummary(weekName) {
             const dayButtonsContainer = document.getElementById(`dayButtons${weekName.charAt(0).toUpperCase() + weekName.slice(1)}`);
@@ -4864,15 +5113,16 @@
                     const button = document.createElement('button');
                     button.classList.add('nav-button'); // Réutiliser le style nav-button
                     button.textContent = `Jour ${i}`;
+                    button.setAttribute('data-day', i); // Add data-day attribute
                     button.onclick = (event) => {
-                        // Cacher tous les résumés de semaine
+                        // Hide all week summaries
                         const weekSummaryContents = document.querySelectorAll('.week-summary-content');
                         for (let k = 0; k < weekSummaryContents.length; k++) {
                             weekSummaryContents[k].classList.remove('active');
                         }
-                        // Activer le conteneur de contenu de la semaine spécifique
+                        // Activate the specific week content container
                         document.getElementById(weekName).classList.add('active');
-                        // Puis ouvrir l'onglet du jour spécifique
+                        // Then open the specific day tab
                         openTab(event, `jour${i}`);
                     };
                     dayButtonsContainer.appendChild(button);
@@ -4880,105 +5130,61 @@
             }
         }
 
-        // Sticky header logic
-        const header = document.querySelector('header');
-        const mainNav = document.querySelector('.main-navigation');
-
-        // Get the initial top position of the header
-        let headerInitialTop = header.offsetTop;
-
-        // Define the target height for the sticky header
-        const stickyHeaderTargetHeight = 70; // This is the height when it's fully sticky
-
-        // Function to update the sticky state
-        function updateStickyState() {
-            const scrollY = window.pageYOffset;
-            const mainNavHeight = mainNav.offsetHeight; // Get current height of main nav
-
-            // If the scroll position is beyond where the header initially starts
-            if (scrollY > headerInitialTop) {
-                // Add sticky classes
-                header.classList.add('sticky-header');
-                mainNav.classList.add('sticky-nav');
-
-                // Calculate the total height of the sticky elements
-                const totalStickyHeight = stickyHeaderTargetHeight + mainNavHeight;
-                document.body.style.paddingTop = `${totalStickyHeight}px`;
-                document.body.classList.add('sticky-active'); // For body padding transition
-            } else {
-                // Remove sticky classes
-                header.classList.remove('sticky-header');
-                mainNav.classList.remove('sticky-nav');
-                document.body.style.paddingTop = '0';
-                document.body.classList.remove('sticky-active');
-            }
-        }
-
-        // Event listener for scroll
-        window.addEventListener('scroll', updateStickyState);
-
-        // Recalculate initial positions and heights on resize
-        window.addEventListener('resize', () => {
-            // Temporarily remove sticky classes to get accurate non-sticky dimensions
-            header.classList.remove('sticky-header');
-            mainNav.classList.remove('sticky-nav');
-            document.body.style.paddingTop = '0';
-            document.body.classList.remove('sticky-active');
-
-            // Recalculate initial top
-            headerInitialTop = header.offsetTop;
-
-            // Re-evaluate sticky state after resize
-            updateStickyState();
-        });
-
-        // Initial call on DOMContentLoaded to set up initial state
         document.addEventListener('DOMContentLoaded', () => {
-            // Ensure styles are applied before getting offsetTop and offsetHeight
-            setTimeout(() => {
-                headerInitialTop = header.offsetTop;
-                updateStickyState(); // Set initial sticky state if already scrolled
-            }, 100); // Small delay to ensure layout is stable
-        });
-        
-        // Bouton retour en haut
-        window.onload = function() {
-            var backToTop = document.getElementById('back-to-top');
-            window.addEventListener('scroll', function() {
-                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                    backToTop.classList.add('visible');
+            loadProgress(); // Load user progress first
+
+            // Set initial header top position
+            headerInitialTop = document.getElementById('main-header').offsetTop;
+
+            // Determine the initial week and day to display
+            const initialDay = userProgress.currentDay;
+            const initialWeekNumber = Math.ceil(initialDay / 7);
+            const initialWeekId = `week${initialWeekNumber}`;
+
+            // Open the initial week and day
+            // Pass null for event object as it's not a real click, but specify the day to activate
+            openWeek(null, initialWeekId, initialDay);
+
+            // Add scroll event listener for sticky header
+            window.addEventListener('scroll', updateStickyState);
+            // Also update sticky state on load in case page is already scrolled
+            updateStickyState();
+
+            // Back to top button logic
+            const backToTopBtn = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
                 } else {
-                    backToTop.classList.remove('visible');
+                    backToTopBtn.classList.remove('visible');
                 }
             });
-        };
-        
-        document.getElementById('back-to-top').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-        
-        // Initialisation de la page au chargement du DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProgress(); // Charger la progression de l'utilisateur
 
-            const initialWeekId = `week${Math.ceil(userProgress.currentDay / 7)}`;
-            const initialWeekBtn = document.querySelector(`.section-btn[onclick*="${initialWeekId}"]`);
-            
-            if (initialWeekBtn) {
-                // Appeler openWeek avec le jour spécifique à activer
-                openWeek({ currentTarget: initialWeekBtn }, initialWeekId, userProgress.currentDay);
-            } else {
-                // Par défaut, Semaine 1, Jour 1 si aucune progression n'est trouvée
-                const firstWeekBtn = document.querySelector('.section-btn[onclick*="week1"]');
-                if (firstWeekBtn) {
-                    openWeek({ currentTarget: firstWeekBtn }, 'week1', 1);
-                }
+            backToTopBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                document.body.classList.add(currentTheme);
+                themeToggleBtn.textContent = currentTheme === 'dark-mode' ? '☀️' : '�';
             }
 
-            // Appel initial pour définir l'état sticky si la page est déjà défilée au chargement
-            updateStickyState();
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark-mode');
+                    themeToggleBtn.textContent = '☀️';
+                } else {
+                    localStorage.removeItem('theme');
+                    themeToggleBtn.textContent = '🌙';
+                }
+            });
         });
     </script>
 </body>
 </html>
+�
