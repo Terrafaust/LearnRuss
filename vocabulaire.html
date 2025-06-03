@@ -1766,7 +1766,7 @@
             { russian: "вечер", pronunciation: "[viètchèr]", translation: "soir", categories: ["time"] },
         ];
 
-        // Variables globales
+         // Variables globales
         let currentCategory = "all";
         let allTranslationsHidden = false;
         let allPronunciationsHidden = false;
@@ -1908,17 +1908,20 @@
                 card.dataset.word = word.russian;
                 card.dataset.categories = word.categories.join(',');
                 
-                const russianWordContent = word.russian + (word.nuance ? `<span class="info-icon" data-russian="${word.russian}" data-translation="${word.translation}" data-nuance="${word.nuance}" title="Plus d'informations">ℹ️</span>` : '');
+                // Construct the info icon button if nuance exists
+                const infoIconButtonHtml = word.nuance ? 
+                    `<button class="card-btn info-icon-btn" data-russian="${word.russian}" data-translation="${word.translation}" data-nuance="${word.nuance}" title="Plus d'informations">ℹ️</button>` : '';
 
                 const cardContent = `
                     <div class="card-controls">
+                        ${infoIconButtonHtml} <!-- L'icône de nuance est maintenant ici -->
                         <button class="card-btn toggle-russian-btn" title="Masquer/Afficher le mot russe">🇷🇺</button>
                         <button class="card-btn toggle-pronunciation-btn" title="Masquer/Afficher la prononciation">🔊</button>
                         <button class="card-btn toggle-translation-btn" title="Masquer/Afficher la traduction">👁️</button>
                         <button class="card-btn remove-word-btn" title="Masquer ce mot">❌</button>
                     </div>
                     <div class="card-body">
-                        <div class="russian-word ${allRussianHidden ? 'hidden-russian' : ''}">${russianWordContent}</div>
+                        <div class="russian-word ${allRussianHidden ? 'hidden-russian' : ''}">${word.russian}</div>
                         <div class="pronunciation ${allPronunciationsHidden ? 'hidden-pronunciation' : ''}">${word.pronunciation}</div>
                         <div class="translation ${allTranslationsHidden ? 'hidden-translation' : ''}">${word.translation}</div>
                         <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px;">
@@ -1954,9 +1957,9 @@
                 });
 
                 // Add event listener for info icon if it exists
-                const infoIcon = card.querySelector('.info-icon');
-                if (infoIcon) {
-                    infoIcon.addEventListener('click', function(event) {
+                const infoIconBtn = card.querySelector('.info-icon-btn');
+                if (infoIconBtn) {
+                    infoIconBtn.addEventListener('click', function(event) {
                         event.stopPropagation(); // Prevent card click from triggering
                         openModal(this.dataset.russian, this.dataset.translation, this.dataset.nuance);
                     });
